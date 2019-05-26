@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.sesang06.lightnovellist.R
 import com.sesang06.lightnovellist.adapter.LightNovelAdapter
+import com.sesang06.lightnovellist.adapter.LoadType
 import com.sesang06.lightnovellist.model.LightNovel
 import com.sesang06.lightnovellist.rx.AutoClearedDisposable
 import com.sesang06.lightnovellist.service.LightNovelListServiceDummyAPI
@@ -19,7 +20,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_light_novel.*
 import kotlinx.android.synthetic.main.fragment_light_novel.view.*
 
-class LightNovelListFragment : Fragment() {
+abstract class LightNovelListFragment : Fragment() {
 
     internal val adapter by lazy {
         LightNovelAdapter()
@@ -28,11 +29,11 @@ class LightNovelListFragment : Fragment() {
     internal val disposeables = AutoClearedDisposable(this)
 
     internal val viewDisposables = AutoClearedDisposable(this, false)
-
+    abstract internal val loadType: LoadType
 
     internal val viewModelFactory by lazy {
         LightNovelListViewModelFactory(
-            provideLightNovelListApi()
+            provideLightNovelListApi(), loadType
         )
     }
     lateinit var viewModel: LightNovelListViewModel

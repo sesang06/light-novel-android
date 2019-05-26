@@ -13,11 +13,11 @@ interface LightNovelListServiceApi {
     fun hit(@Query("last_id") lastId: Int): Observable<DataResponse<LightNovelList>>
 
 
-    @GET("hit")
+    @GET("recommend")
     fun recommend(@Query("last_id") lastId: Int): Observable<DataResponse<LightNovelList>>
 
 
-    @GET("hit")
+    @GET("new")
     fun new(@Query("last_id") lastId: Int): Observable<DataResponse<LightNovelList>>
 }
 
