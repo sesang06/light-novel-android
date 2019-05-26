@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="150dp"
+		xmlns:app="http://schemas.android.com/apk/res-auto">
+	<ImageView
+			android:id="@+id/thumbnail_image_view"
+			android:layout_width="100dp"
+			android:layout_height="match_parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintLeft_toLeftOf="parent"
+			android:src="@drawable/ic_home_black_24dp"
+			/>
+	<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_margin="16dp"
+			app:layout_constraintLeft_toRightOf="@+id/thumbnail_image_view"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			
+			>
+		<TextView
+				android:text="용왕이 하는 일! 8"
+				android:textSize="16sp"
+				android:id="@+id/title_text_view"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/black"
+				android:layout_marginBottom="8dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				/>
+		
+		<TextView
+				android:text="이 라이트노벨이 대단하다! 1위"
+				android:textSize="12sp"
+				android:id="@+id/description_text_view"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/black"
+				android:layout_marginBottom="8dp"
+				
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				/>
+		<TextView
+				android:text="시라토리 시로 | 영상출판미디어"
+				android:textSize="12sp"
+				android:id="@+id/author_publisher_text_view"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/black"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				/>
+		<TextView
+				android:text="이세계 전생 판타지"
+				android:textSize="12sp"
+				android:id="@+id/category_text_view"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/black"
+				
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				/>
+		<TextView
+				android:text="2019년 10일"
+				android:textSize="12sp"
+				android:id="@+id/publication_date_text_view"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/black"
+			
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				/>
+	
+	</LinearLayout>
+	
+</android.support.constraint.ConstraintLayout>
