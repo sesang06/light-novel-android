@@ -7,7 +7,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val baseUrl = "http://192.168.200.147:4000/api/"
+const val baseUrl = "http://34.97.67.121:4000/api/"
 fun provideLightNovelListApi(): LightNovelListServiceApi
         = Retrofit.Builder()
     .baseUrl(baseUrl)

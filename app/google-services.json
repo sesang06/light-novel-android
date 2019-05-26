@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "855481357120",
+    "firebase_url": "https://lightnovellist-850e9.firebaseio.com",
+    "project_id": "lightnovellist-850e9",
+    "storage_bucket": "lightnovellist-850e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855481357120:android:ad83d1221e11ad4c",
+        "android_client_info": {
+          "package_name": "com.sesang06.lightnovellist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855481357120-rb1oa02u60vpolmoj7p2c44j58b8kveh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sesang06.lightnovellist",
+            "certificate_hash": "8b1146a82c41c0f57be1eb8c225a2033d8ea55e8"
+          }
+        },
+        {
+          "client_id": "855481357120-k2dnsm2a1egbvvp1ua7el0ojdtri7tei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhArihxfWI_uH_rFuE8ftnSos9n3keqtE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855481357120-k2dnsm2a1egbvvp1ua7el0ojdtri7tei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
