@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:layout_width="match_parent"
-		android:layout_height="150dp"
-		xmlns:app="http://schemas.android.com/apk/res-auto">
+		android:layout_height="150dp">
+	
 	<ImageView
 			android:id="@+id/thumbnail_image_view"
 			android:layout_width="100dp"
@@ -11,8 +12,8 @@
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintLeft_toLeftOf="parent"
-			android:visibility="gone"
 			/>
+	
 	<LinearLayout
 			android:orientation="vertical"
 			android:layout_width="0dp"
@@ -24,6 +25,7 @@
 			app:layout_constraintBottom_toBottomOf="parent"
 			
 			>
+		
 		<TextView
 				android:textSize="16sp"
 				android:id="@+id/title_text_view"
@@ -43,6 +45,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				/>
+		
 		<TextView
 				android:textSize="12sp"
 				android:id="@+id/author_publisher_text_view"
@@ -51,6 +54,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				/>
+		
 		<TextView
 				android:textSize="12sp"
 				android:id="@+id/category_text_view"
@@ -59,6 +63,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				/>
+		
 		<TextView
 				android:textSize="12sp"
 				android:id="@+id/publication_date_text_view"
@@ -69,5 +74,5 @@
 				/>
 	
 	</LinearLayout>
-	
+
 </android.support.constraint.ConstraintLayout>
