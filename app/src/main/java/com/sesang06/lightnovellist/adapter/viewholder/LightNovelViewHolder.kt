@@ -21,7 +21,7 @@ class LightNovelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(lightNovel: LightNovel) {
         Glide
             .with(itemView.context)
-            .load(lightNovel.thumnbnailURL)
+            .load(lightNovel.thumbnail)
             .into(thumbnailImageView)
         titleTextView.text = lightNovel.title
         descriptionTextView.text = lightNovel.description

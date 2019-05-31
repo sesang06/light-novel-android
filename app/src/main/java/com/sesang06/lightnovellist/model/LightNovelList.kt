@@ -1,9 +1,8 @@
 package com.sesang06.lightnovellist.model
 
-class LightNovelList {
-    val list: List<LightNovel>
+import com.google.gson.annotations.SerializedName
 
-    constructor(list: List<LightNovel>){
-        this.list = list
-    }
-}
+data class LightNovelList(@SerializedName("is_last_page")
+                val isLastPage: Boolean = false,
+                @SerializedName("list")
+                val list: List<LightNovel> = listOf())

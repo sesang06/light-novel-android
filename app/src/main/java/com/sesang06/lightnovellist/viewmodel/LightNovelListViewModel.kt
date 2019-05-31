@@ -1,6 +1,5 @@
 package com.sesang06.lightnovellist.viewmodel
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import com.sesang06.lightnovellist.adapter.LoadType
 import com.sesang06.lightnovellist.model.DataResponse
@@ -11,8 +10,6 @@ import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.subjects.BehaviorSubject
-import io.reactivex.subjects.PublishSubject
-import java.util.*
 
 interface LightNovelListViewModelType {
     val lightNovels: BehaviorSubject<List<LightNovel>>

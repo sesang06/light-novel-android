@@ -1,14 +1,10 @@
 package com.sesang06.lightnovellist.model
 
-class DataResponse<T> {
-    val code: Int
-    val message: String
-    val data: T
+import com.google.gson.annotations.SerializedName
 
-    constructor(code: Int, message: String, data: T) {
-        this.code = code
-        this.message = message
-        this.data = data
-    }
-
-}
+data class DataResponse<T>(@SerializedName("code")
+                        val code: Int = 0,
+                                  @SerializedName("data")
+                        val data: T,
+                                  @SerializedName("message")
+                        val message: String = "")

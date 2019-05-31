@@ -1,26 +1,21 @@
 package com.sesang06.lightnovellist.controller
 
 import android.arch.lifecycle.ViewModelProviders
-import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sesang06.lightnovellist.R
 import com.sesang06.lightnovellist.adapter.LightNovelAdapter
 import com.sesang06.lightnovellist.adapter.LoadType
-import com.sesang06.lightnovellist.model.LightNovel
 import com.sesang06.lightnovellist.rx.AutoClearedDisposable
-import com.sesang06.lightnovellist.service.LightNovelListServiceDummyAPI
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
 import com.sesang06.lightnovellist.viewmodel.LightNovelListViewModel
 import com.sesang06.lightnovellist.viewmodel.LightNovelListViewModelFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_light_novel.*
 import kotlinx.android.synthetic.main.fragment_light_novel.view.*
 
 abstract class LightNovelListFragment : Fragment() {

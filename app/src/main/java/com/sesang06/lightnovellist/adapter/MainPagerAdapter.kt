@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.sesang06.lightnovellist.controller.HitLightNovelListFragment
-import com.sesang06.lightnovellist.controller.LightNovelListFragment
 import com.sesang06.lightnovellist.controller.NewLightNovelListFragment
 import com.sesang06.lightnovellist.controller.RecommendLightNovelListFragment
 
