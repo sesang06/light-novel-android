@@ -11,12 +11,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var pagerAdapter: MainPagerAdapter
 
-    private var navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
-    item ->
-         when (item.itemId) {
+    private var navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
             R.id.action_hot -> view_pager.currentItem = 0
             R.id.action_new -> view_pager.currentItem = 1
-             R.id.action_recommend -> view_pager.currentItem = 2
+            R.id.action_recommend -> view_pager.currentItem = 2
         }
         true
     }
@@ -36,11 +35,12 @@ class MainActivity : AppCompatActivity() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }
+
             override fun onPageSelected(position: Int) {
                 when (position) {
-                    0 ->  bottom_navigation.selectedItemId =   R.id.action_hot
-                    1 ->  bottom_navigation.selectedItemId =   R.id.action_new
-                        2 ->  bottom_navigation.selectedItemId =   R.id.action_recommend
+                    0 -> bottom_navigation.selectedItemId = R.id.action_hot
+                    1 -> bottom_navigation.selectedItemId = R.id.action_new
+                    2 -> bottom_navigation.selectedItemId = R.id.action_recommend
                 }
 
             }
