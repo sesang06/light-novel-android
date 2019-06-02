@@ -22,4 +22,8 @@ interface LightNovelListServiceApi {
 
     @GET("light_novel")
     fun lightNovel(@Query("id") id: Int): Observable<DataResponse<LightNovelResponse>>
+
+    @GET("search")
+    fun search(@Query("query") query: String): Observable<DataResponse<LightNovelList>>
+
 }
