@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.sesang06.lightnovellist.controller.HitLightNovelListFragment
+import com.sesang06.lightnovellist.controller.MainFragment
 import com.sesang06.lightnovellist.controller.NewLightNovelListFragment
 import com.sesang06.lightnovellist.controller.RecommendLightNovelListFragment
 
@@ -20,7 +21,7 @@ class MainPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAda
         when(p0) {
             0 -> return HitLightNovelListFragment()
             1 -> return NewLightNovelListFragment()
-            2 -> return RecommendLightNovelListFragment()
+            2 -> return MainFragment()
         }
         return RecommendLightNovelListFragment()
     }
