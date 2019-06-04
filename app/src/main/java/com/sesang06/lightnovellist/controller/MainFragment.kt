@@ -20,6 +20,9 @@ import com.sesang06.lightnovellist.viewmodel.LightNovelListViewModelFactory
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 
+
+
+
 class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, LightNovelRecommendAdapter.ItemClickListener {
 
     internal val featuredAdapter by lazy {
@@ -28,6 +31,13 @@ class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, Lig
 
     internal val featuredLayoutManager by lazy {
         LinearLayoutManager(this.context).apply { orientation = LinearLayoutManager.HORIZONTAL }
+
+//        object : LinearLayoutManager(this.context) {
+//            override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
+//                lp?.width = lp!!.width / 2
+//                return super.checkLayoutParams(lp)
+//            }
+//        }.apply { orientation = LinearLayoutManager.HORIZONTAL }
     }
 
     internal val recommendAdapter by lazy {
@@ -40,7 +50,6 @@ class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, Lig
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
-
         // featured Recylcer View
         view.featured_recycler_view.adapter = featuredAdapter
         view.featured_recycler_view.layoutManager = featuredLayoutManager

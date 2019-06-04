@@ -8,6 +8,10 @@ import com.sesang06.lightnovellist.adapter.viewholder.LightNovelFeaturedViewHold
 import com.sesang06.lightnovellist.adapter.viewholder.LightNovelViewHolder
 import com.sesang06.lightnovellist.model.LightNovel
 
+
+
+
+
 class LightNovelFeaturedAdapter : RecyclerView.Adapter<LightNovelFeaturedViewHolder>() {
 
     private var items: MutableList<LightNovel> = mutableListOf()
@@ -22,6 +26,7 @@ class LightNovelFeaturedAdapter : RecyclerView.Adapter<LightNovelFeaturedViewHol
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LightNovelFeaturedViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_light_novel_featured, parent, false)
+
         return LightNovelFeaturedViewHolder(itemView)
     }
 
