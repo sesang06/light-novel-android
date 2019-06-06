@@ -7,15 +7,15 @@
 		xmlns:app="http://schemas.android.com/tools"
 		android:orientation="vertical"
 		android:layout_margin="5dp"
-		android:paddingRight="5dp"
-		android:paddingLeft="5dp"
+		android:paddingRight="10dp"
+		android:paddingLeft="10dp"
 		>
 	
 	<android.support.v7.widget.CardView
 			android:layout_width="100dp"
-			android:layout_height="100dp"
-			card_view:cardCornerRadius="8dp"
-			app:cardCornerRadius="8dp"
+			android:layout_height="150dp"
+		
+			app:cardCornerRadius="4dp"
 			app:cardMaxElevation="2dp"
 			app:cardElevation="2dp"
 			app:cardPreventCornerOverlap="true"
@@ -34,11 +34,14 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:textSize="12sp"
-			android:fontFamily="sans-serif-medium"
+			android:fontFamily="sans-serif"
 			android:textColor="@color/black"
 			android:text="라이트노벨 제목 라이트노벨 제목"
 			android:ellipsize="end"
 			android:maxLines="2"
-			android:padding="2dp"
+			android:paddingTop="10dp"
+			android:paddingBottom="10dp"
+			android:paddingLeft="2dp"
+			android:paddingRight="2dp"
 			/>
 </LinearLayout>

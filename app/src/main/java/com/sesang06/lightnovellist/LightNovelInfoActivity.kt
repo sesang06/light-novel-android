@@ -26,6 +26,7 @@ class LightNovelInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_light_novel_info)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)[LightNovelInfoViewModel::class.java]
 
@@ -41,8 +42,8 @@ class LightNovelInfoActivity : AppCompatActivity() {
                     .into(thumbnail_image_view)
                 title_text_view.text = lightNovel.title
                 description_text_view.text = lightNovel.description
-                val authorPublisher = lightNovel.author.name + " | " + lightNovel.publisher.name
-                author_publisher_text_view.text = authorPublisher
+                author_text_view.text = lightNovel.author.name
+                publisher_text_view.text = lightNovel.publisher.name
                 val sdf = java.text.SimpleDateFormat("yyyy년 MM월 dd일")
                 val publicationDateString = sdf.format(lightNovel.publicationDate)
                 publication_date_text_view.text = publicationDateString
