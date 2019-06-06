@@ -12,7 +12,7 @@ class LightNovelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val thumbnailImageView by lazy { itemView.thumbnail_image_view }
     private val descriptionTextView by lazy { itemView.description_text_view }
     private val authorPublisherTextView by lazy { itemView.author_publisher_text_view }
-    private val categoryTextView by lazy { itemView.category_text_view }
+//    private val categoryTextView by lazy { itemView.category_text_view }
     private val publicationdDateTextView by lazy { itemView.publication_date_text_view }
 
     fun reset() {
