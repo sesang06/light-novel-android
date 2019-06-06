@@ -11,6 +11,7 @@ import android.view.Menu
 import android.support.v7.widget.SearchView
 import com.sesang06.lightnovellist.adapter.LightNovelAdapter
 import com.sesang06.lightnovellist.adapter.LightNovelSearchPreviewAdapter
+import com.sesang06.lightnovellist.adapter.LightNovelSearchResultAdapter
 import com.sesang06.lightnovellist.adapter.MainPagerAdapter
 import com.sesang06.lightnovellist.model.LightNovel
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
@@ -24,7 +25,11 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.fragment_light_novel.view.*
 
-class SearchLightNovelActivity : AppCompatActivity(), LightNovelSearchPreviewAdapter.ItemClickListener {
+class SearchResultActivity : AppCompatActivity(), LightNovelSearchResultAdapter.ItemClickListener {
+
+    companion object {
+        const val KEY_QUERY = "key_query"
+    }
 
     internal val viewModelFactory by lazy {
         SearchLightNovelViewModelFactory(
@@ -32,24 +37,24 @@ class SearchLightNovelActivity : AppCompatActivity(), LightNovelSearchPreviewAda
         )
     }
     lateinit var viewModel: SearchLightNovelViewModel
-    lateinit var searchView: SearchView
 
     internal val adapter by lazy {
-        LightNovelSearchPreviewAdapter().apply { setItemClickListener(this@SearchLightNovelActivity) }
+        LightNovelSearchResultAdapter().apply { setItemClickListener(this@SearchResultActivity) }
     }
 
     internal val layoutManager by lazy {
         LinearLayoutManager(this)
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        setContentView(R.layout.activity_search_result)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         viewModel = ViewModelProviders.of(this, viewModelFactory)[SearchLightNovelViewModel::class.java]
         light_novel_recycler_view.layoutManager = layoutManager
         light_novel_recycler_view.adapter = this.adapter
+        val query = intent.getStringExtra(SearchResultActivity.KEY_QUERY)
+
         viewModel.lightNovels
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { items ->
@@ -62,40 +67,39 @@ class SearchLightNovelActivity : AppCompatActivity(), LightNovelSearchPreviewAda
                     notifyDataSetChanged()
                 }
             }
+        viewModel.load(query)
+
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.search_menu, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-        searchView = searchItem.actionView as SearchView
-        searchItem.expandActionView()
-        searchView?.setBackgroundColor(Color.WHITE)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                viewModel.load(newText)
-                return false
-            }
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-                // task HERE
-                return false
-            }
-
-        })
-
-        searchView.queryHint = "라이트노벨 제목을 입력하세요."
-        searchView.maxWidth = Integer.MAX_VALUE
-        return super.onCreateOptionsMenu(menu)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.search_menu, menu)
+//        val searchItem = menu.findItem(R.id.action_search)
+//        val searchView = searchItem.actionView as SearchView
+//        searchItem.expandActionView()
+//        searchView?.setBackgroundColor(Color.WHITE)
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//
+//            override fun onQueryTextChange(newText: String): Boolean {
+//                viewModel.load(newText)
+//                return false
+//            }
+//
+//            override fun onQueryTextSubmit(query: String): Boolean {
+//                // task HERE
+//                return false
+//            }
+//
+//        })
+//
+//        searchView.queryHint = "라이트노벨 제목을 입력하세요."
+//        searchView.maxWidth = Integer.MAX_VALUE
+//        return super.onCreateOptionsMenu(menu)
+//    }
 
     override fun onItemClick(lightNovel: LightNovel) {
-        val query = searchView?.query.toString()
-
-        val intent = Intent(this, SearchResultActivity::class.java).apply {
-            putExtra( SearchResultActivity.KEY_QUERY, query)
-
+        val intent = Intent(this, LightNovelInfoActivity::class.java).apply {
+            putExtra( LightNovelInfoActivity.KEY_ID, lightNovel.id)
         }
         this.startActivity(intent)
     }

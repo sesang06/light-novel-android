@@ -30,6 +30,10 @@
                     android:resource="@xml/searchable">
             </meta-data>
         </activity>
+        <activity android:name=".SearchResultActivity"
+                  android:theme="@style/NoActionBarAppTheme">
+        
+        </activity>
     </application>
 
 </manifest>
