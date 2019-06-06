@@ -2,6 +2,7 @@ package com.sesang06.lightnovellist
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
@@ -65,6 +66,8 @@ class SearchLightNovelActivity : AppCompatActivity(), LightNovelAdapter.ItemClic
         menuInflater.inflate(R.menu.search_menu, menu)
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
+        searchItem.expandActionView()
+        searchView?.setBackgroundColor(Color.WHITE)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
