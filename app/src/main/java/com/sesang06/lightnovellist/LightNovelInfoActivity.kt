@@ -2,8 +2,8 @@ package com.sesang06.lightnovellist
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.annotation.MainThread
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
 import com.sesang06.lightnovellist.viewmodel.LightNovelInfoViewModel
@@ -27,15 +27,17 @@ class LightNovelInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_light_novel_info)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         viewModel = ViewModelProviders.of(this, viewModelFactory)[LightNovelInfoViewModel::class.java]
 
-        val id = intent.getIntExtra(KEY_ID,0)
+        val id = intent.getIntExtra(KEY_ID, 0)
         viewModel.load(id)
 
         viewModel.lightNovel
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { lightNovel ->
+                toolbar.title = lightNovel.title
                 Glide
                     .with(this@LightNovelInfoActivity)
                     .load(lightNovel.thumbnail)
@@ -49,5 +51,14 @@ class LightNovelInfoActivity : AppCompatActivity() {
                 publication_date_text_view.text = publicationDateString
                 link_text_view.text = lightNovel.link
             }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            this.onBackPressed()
+            return false
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

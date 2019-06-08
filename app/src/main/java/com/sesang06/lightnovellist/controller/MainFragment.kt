@@ -56,6 +56,8 @@ class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, Lig
         LinearLayoutManager(this.context).apply { orientation = LinearLayoutManager.HORIZONTAL }
     }
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         // featured Recylcer View
