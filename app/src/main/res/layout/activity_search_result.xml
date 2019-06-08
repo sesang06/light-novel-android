@@ -14,7 +14,20 @@
 			app:layout_constraintTop_toTopOf="parent"
 			android:elevation="4dp"
 			android:theme="@style/SearchViewStyle"
-			app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+			app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+		<SearchView
+				android:id="@+id/search_view"
+				
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				
+				android:layout_gravity="center_horizontal"
+				
+				app:iconifiedByDefault="false"
+				app:queryHint="Search name or email"
+				
+				/>
+	</android.support.v7.widget.Toolbar>
 	
 	<android.support.v7.widget.RecyclerView
 			android:id="@+id/light_novel_recycler_view"
