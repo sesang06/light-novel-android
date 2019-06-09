@@ -13,4 +13,7 @@
     <color name="orangelight">#F3AE1B</color>
     <color name="orangedark">#BB6008</color>
     <color name="black">#000000</color>
+    <color name="text_high_emphasis">#DE000000</color>
+    <color name="text_helper">#99000000</color>
+    <color name="divider">#1F000000</color>
 </resources>

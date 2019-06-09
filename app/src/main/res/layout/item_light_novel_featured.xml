@@ -55,17 +55,21 @@
 			</View>
 			<TextView
 					android:id="@+id/title_text_view"
-					android:text="Text"
-					android:gravity="center_horizontal|bottom"
+					
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:textSize="20sp"
-					android:fontFamily="sans-serif-medium"
-					android:textColor="@color/white"
+					
 					app:layout_constraintTop_toTopOf="parent"
 					app:layout_constraintRight_toRightOf="parent"
 					app:layout_constraintLeft_toLeftOf="parent"
 					app:layout_constraintBottom_toBottomOf="parent"
+					
+					android:gravity="center_horizontal|bottom"
+					
+					android:text="Text"
+					android:textSize="20sp"
+					android:fontFamily="sans-serif-medium"
+					android:textColor="@color/white"
 					android:paddingBottom="12dp"
 					>
 			

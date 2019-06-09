@@ -18,10 +18,10 @@ class MainPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAda
     }
 
     override fun getItem(p0: Int): Fragment {
-        when(p0) {
-            0 -> return HitLightNovelListFragment()
-            1 -> return NewLightNovelListFragment()
-            2 -> return MainFragment()
+        when (p0) {
+            0 -> return MainFragment()
+            1 -> return HitLightNovelListFragment()
+            2 -> return NewLightNovelListFragment()
         }
         return RecommendLightNovelListFragment()
     }

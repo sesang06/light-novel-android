@@ -1,94 +1,181 @@
 package com.sesang06.lightnovellist
 
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Menu
-import android.support.v7.widget.SearchView
-import com.sesang06.lightnovellist.adapter.LightNovelAdapter
-import com.sesang06.lightnovellist.adapter.MainPagerAdapter
+import android.transition.Visibility
+import android.view.View
+import android.widget.SearchView
+import com.sesang06.lightnovellist.adapter.LightNovelSearchPreviewAdapter
+import com.sesang06.lightnovellist.adapter.LightNovelSearchResultAdapter
 import com.sesang06.lightnovellist.model.LightNovel
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
-import com.sesang06.lightnovellist.viewmodel.LightNovelInfoViewModel
-import com.sesang06.lightnovellist.viewmodel.LightNovelInfoViewModelFactory
 import com.sesang06.lightnovellist.viewmodel.SearchLightNovelViewModel
 import com.sesang06.lightnovellist.viewmodel.SearchLightNovelViewModelFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.toolbar
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.fragment_light_novel.view.*
+import kotlinx.android.synthetic.main.activity_search.search_view
+import kotlinx.android.synthetic.main.activity_search.toolbar
+import kotlinx.android.synthetic.main.activity_search_result.*
 
-class SearchLightNovelActivity : AppCompatActivity(), LightNovelAdapter.ItemClickListener {
+class SearchLightNovelActivity : AppCompatActivity() {
 
-    internal val viewModelFactory by lazy {
+    private val viewModelFactory by lazy {
         SearchLightNovelViewModelFactory(
             provideLightNovelListApi()
         )
     }
-    lateinit var viewModel: SearchLightNovelViewModel
+    lateinit var resultViewModel: SearchLightNovelViewModel
+    lateinit var previewViewModel: SearchLightNovelViewModel
 
-    internal val adapter by lazy {
-        LightNovelAdapter().apply { setItemClickListener(this@SearchLightNovelActivity) }
+    private val searchResultAdapter by lazy {
+        LightNovelSearchResultAdapter().apply {
+            setItemClickListener(searchResultClickListener)
+        }
     }
 
-    internal val layoutManager by lazy {
+    private val searchResultLayoutManager by lazy {
         LinearLayoutManager(this)
     }
+
+    private val searchResultClickListener = object : LightNovelSearchResultAdapter.ItemClickListener {
+        override fun onItemClick(lightNovel: LightNovel) {
+
+        }
+    }
+
+    private val searchPreviewAdapter by lazy {
+        LightNovelSearchPreviewAdapter().apply {
+            setItemClickListener(searchPreviewClickListener)
+        }
+    }
+
+
+    internal val searchPreviewLayoutManager by lazy {
+        LinearLayoutManager(this)
+    }
+
+    internal val searchPreviewClickListener = object : LightNovelSearchPreviewAdapter.ItemClickListener {
+        override fun onItemClick(lightNovel: LightNovel) {
+            search_view.setQuery(lightNovel.title, true)
+        }
+    }
+
+    internal val queryTextListener = object : android.widget.SearchView.OnQueryTextListener {
+
+        override fun onQueryTextChange(newText: String): Boolean {
+            previewViewModel.load(newText)
+            return false
+        }
+
+        override fun onQueryTextSubmit(query: String): Boolean {
+            resultViewModel.load(query)
+            search_view.clearFocus()
+            return true
+        }
+
+    }
+
+    internal val queryFocusListener = object : View.OnFocusChangeListener {
+        override fun onFocusChange(v: View?, hasFocus: Boolean) {
+            if (hasFocus) {
+                search_result_recycler_view.visibility = View.GONE
+                search_preview_recycler_view.visibility = View.VISIBLE
+            } else {
+                search_result_recycler_view.visibility = View.VISIBLE
+                search_preview_recycler_view.visibility = View.GONE
+            }
+        }
+    }
+
+    private val disposable = CompositeDisposable()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[SearchLightNovelViewModel::class.java]
-        light_novel_recycler_view.layoutManager = layoutManager
-        light_novel_recycler_view.adapter = this.adapter
-        viewModel.lightNovels
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { items ->
-                with(adapter) {
-                    if (items.isEmpty()) {
-                        clearItems()
-                    } else {
-                        setItems(items)
+        previewViewModel = ViewModelProviders.of(this, viewModelFactory)[SearchLightNovelViewModel::class.java]
+        resultViewModel = ViewModelProviders.of(this, viewModelFactory)[SearchLightNovelViewModel::class.java]
+
+        search_preview_recycler_view.layoutManager = searchPreviewLayoutManager
+        search_preview_recycler_view.adapter = searchPreviewAdapter
+
+        search_result_recycler_view.layoutManager = searchResultLayoutManager
+        search_result_recycler_view.adapter = searchResultAdapter
+
+
+        disposable.add(
+            previewViewModel.lightNovels
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { items ->
+                    with(searchPreviewAdapter) {
+                        if (items.isEmpty()) {
+                            clearItems()
+                        } else {
+                            setItems(items)
+                        }
+                        notifyDataSetChanged()
                     }
-                    notifyDataSetChanged()
                 }
-            }
+        )
+
+        disposable.add(
+            resultViewModel.lightNovels
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { items ->
+                    with(searchResultAdapter) {
+                        if (items.isEmpty()) {
+                            clearItems()
+                        } else {
+                            setItems(items)
+                        }
+                        notifyDataSetChanged()
+                    }
+                }
+        )
+        setupSearchView()
+
     }
 
+    private fun setupSearchView() {
+        search_view.setBackgroundColor(Color.WHITE)
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.search_menu, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                viewModel.load(newText)
-                return false
+        search_view.setIconifiedByDefault(true);
+        search_view.isIconified = false
+        search_view.requestFocusFromTouch();
+        search_view.queryHint = "라이트노벨 제목을 입력하세요."
+        search_view.setOnQueryTextListener(queryTextListener)
+        search_view.setOnQueryTextFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                search_result_recycler_view.visibility = View.GONE
+                search_preview_recycler_view.visibility = View.VISIBLE
+            } else {
+                search_result_recycler_view.visibility = View.VISIBLE
+                search_preview_recycler_view.visibility = View.GONE
             }
 
-            override fun onQueryTextSubmit(query: String): Boolean {
-                // task HERE
-                return false
-            }
-
-        })
-
-        searchView.queryHint = "라이트노벨 제목을 입력하세요."
-        searchView.maxWidth = Integer.MAX_VALUE
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onItemClick(lightNovel: LightNovel) {
-        val intent = Intent(this, LightNovelInfoActivity::class.java).apply {
-            putExtra( LightNovelInfoActivity.KEY_ID, lightNovel.id)
         }
-        this.startActivity(intent)
     }
+
+    override fun onBackPressed() {
+        if (search_view.isFocused){
+            search_view.clearFocus()
+            return
+        }
+        super.onBackPressed()
+    }
+
+//    override fun onItemClick(lightNovel: LightNovel) {
+//        val query = search_view.query.toString()
+//
+//        val intent = Intent(this, SearchResultActivity::class.java).apply {
+//            putExtra( SearchResultActivity.KEY_QUERY, query)
+//
+//        }
+//        this.startActivity(intent)
+//    }
 
 }

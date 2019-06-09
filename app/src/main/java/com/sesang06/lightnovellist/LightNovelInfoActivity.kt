@@ -2,8 +2,8 @@ package com.sesang06.lightnovellist
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.annotation.MainThread
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
 import com.sesang06.lightnovellist.viewmodel.LightNovelInfoViewModel
@@ -26,27 +26,39 @@ class LightNovelInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_light_novel_info)
-
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         viewModel = ViewModelProviders.of(this, viewModelFactory)[LightNovelInfoViewModel::class.java]
 
-        val id = intent.getIntExtra(KEY_ID,0)
+        val id = intent.getIntExtra(KEY_ID, 0)
         viewModel.load(id)
 
         viewModel.lightNovel
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { lightNovel ->
+                toolbar.title = lightNovel.title
                 Glide
                     .with(this@LightNovelInfoActivity)
                     .load(lightNovel.thumbnail)
                     .into(thumbnail_image_view)
                 title_text_view.text = lightNovel.title
                 description_text_view.text = lightNovel.description
-                val authorPublisher = lightNovel.author.name + " | " + lightNovel.publisher.name
-                author_publisher_text_view.text = authorPublisher
+                author_text_view.text = lightNovel.author.name
+                publisher_text_view.text = lightNovel.publisher.name
                 val sdf = java.text.SimpleDateFormat("yyyy년 MM월 dd일")
                 val publicationDateString = sdf.format(lightNovel.publicationDate)
                 publication_date_text_view.text = publicationDateString
                 link_text_view.text = lightNovel.link
             }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            this.onBackPressed()
+            return false
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
