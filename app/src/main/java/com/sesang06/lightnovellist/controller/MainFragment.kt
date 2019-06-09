@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.gson.Gson
 import com.sesang06.lightnovellist.LightNovelFeaturedInfoActivity
+import com.sesang06.lightnovellist.LightNovelRecommendInfoActivity
 import com.sesang06.lightnovellist.R
 import com.sesang06.lightnovellist.SearchLightNovelActivity
 import com.sesang06.lightnovellist.adapter.*
@@ -18,6 +19,7 @@ import com.sesang06.lightnovellist.rx.AutoClearedDisposable
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
 import com.sesang06.lightnovellist.viewmodel.LightNovelListViewModelFactory
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 
@@ -81,6 +83,13 @@ class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, Lig
         featuredAdapter.setItems(listOf(sampleLightNovel(),sampleLightNovel(),sampleLightNovel(), sampleLightNovel()))
         recommendAdapter.setItems(listOf(sampleLightNovel(),sampleLightNovel(),sampleLightNovel(), sampleLightNovel()))
         hitAdapter.setItems(listOf(sampleLightNovel(),sampleLightNovel(),sampleLightNovel(), sampleLightNovel()))
+
+        view.recommend_more_text_view.setOnClickListener { v: View? ->
+
+            val intent = Intent(this@MainFragment.context, LightNovelRecommendInfoActivity::class.java)
+            this@MainFragment.context?.startActivity(intent)
+
+        }
         return view
     }
 

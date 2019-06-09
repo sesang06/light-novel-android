@@ -4,7 +4,7 @@
 											 xmlns:card_view="http://schemas.android.com/tools"
 											 android:layout_width="match_parent"
 											 android:layout_height="match_parent">
-	<ScrollView
+	<android.support.v4.widget.NestedScrollView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			app:layout_constraintTop_toTopOf="parent"
@@ -40,6 +40,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content">
 					<TextView
+							android:id="@+id/recommend_more_text_view"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textSize="13sp"
@@ -174,7 +175,7 @@
 			
 		</LinearLayout>
 	
-	</ScrollView>
+	</android.support.v4.widget.NestedScrollView>
 	
 
 </android.support.constraint.ConstraintLayout>

@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_hot -> view_pager.currentItem = 1
             R.id.action_new -> view_pager.currentItem = 2
         }
+        app_bar.setExpanded(true,true)
         true
     }
 
@@ -46,10 +47,12 @@ class MainActivity : AppCompatActivity() {
                     1 -> bottom_navigation.selectedItemId = R.id.action_hot
                     2 -> bottom_navigation.selectedItemId = R.id.action_new
                 }
+                app_bar.setExpanded(true,true)
 
             }
 
         })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
