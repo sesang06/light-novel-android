@@ -40,6 +40,8 @@
 				android:theme="@style/NoActionBarAppTheme">
 		
 		</activity>
+		<activity android:name=".LightNovelFeaturedInfoActivity"
+				  android:theme="@style/NoActionBarAppTheme"/>
 	</application>
 
 </manifest>

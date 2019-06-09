@@ -1,6 +1,7 @@
 package com.sesang06.lightnovellist
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -43,6 +44,13 @@ class SearchLightNovelActivity : AppCompatActivity() {
 
     private val searchResultClickListener = object : LightNovelSearchResultAdapter.ItemClickListener {
         override fun onItemClick(lightNovel: LightNovel) {
+            val intent = Intent(
+                this@SearchLightNovelActivity,
+                LightNovelInfoActivity::class.java
+            ).apply {
+                putExtra(LightNovelInfoActivity.KEY_ID, lightNovel.id)
+            }
+            this@SearchLightNovelActivity.startActivity(intent)
 
         }
     }

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+	
+	
+	<android.support.v7.widget.CardView
+			android:id="@+id/thumbnail_card_view"
+			android:layout_width="130dp"
+			android:layout_height="180dp"
+			
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintLeft_toLeftOf="parent"
+			
+			android:layout_marginTop="10dp"
+			android:layout_marginBottom="10dp"
+			android:layout_marginLeft="20dp"
+			
+			app:cardCornerRadius="4dp"
+			app:cardMaxElevation="2dp"
+			app:cardElevation="2dp"
+			app:cardPreventCornerOverlap="true"
+			app:cardUseCompatPadding="true"
+			
+			>
+		<ImageView
+				android:id="@+id/thumbnail_image_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="centerCrop"
+				/>
+	
+	</android.support.v7.widget.CardView>
+	
+	<LinearLayout
+			
+			android:id="@+id/info_linear_layout"
+			
+			android:layout_width="0dp"
+			android:layout_height="150dp"
+			
+			android:orientation="vertical"
+			android:elevation="2dp"
+			android:layout_marginTop="20dp"
+			android:layout_marginRight="20dp"
+			android:layout_marginLeft="20dp"
+			
+			app:layout_constraintLeft_toRightOf="@+id/thumbnail_card_view"
+			app:layout_constraintRight_toRightOf="@+id/background_card_view"
+			app:layout_constraintTop_toTopOf="@+id/background_card_view"
+			app:layout_constraintBottom_toTopOf="@+id/editor_linear_layout"
+			
+			
+			>
+		
+		<TextView
+				android:id="@+id/title_text_view"
+				
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_weight="0"
+				android:layout_marginBottom="8dp"
+				
+				android:gravity="center_vertical"
+				
+				android:textSize="20sp"
+				android:fontFamily="sans-serif-medium"
+				android:textStyle="bold"
+				android:textColor="@color/text_high_emphasis"
+				android:ellipsize="end"
+				android:maxLines="2"
+				
+				android:text="흔해빠진 직업으로 세계 최강 8"
+				
+				/>
+		
+		
+		<TextView
+				android:id="@+id/author_text_view"
+				
+				android:layout_width="match_parent"
+				android:layout_height="20dp"
+				
+				android:layout_weight="0"
+				android:layout_marginBottom="8dp"
+				
+				android:textSize="14sp"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/text_helper"
+				android:maxLines="1"
+				android:ellipsize="end"
+				
+				android:text="2019년 10월 1일"
+				/>
+		
+		<TextView
+				android:id="@+id/description_text_view"
+				
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_weight="1"
+				android:layout_marginBottom="8dp"
+				
+				android:gravity="center_vertical"
+				
+				android:textSize="14sp"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/text_helper"
+				android:maxLines="2"
+				android:ellipsize="end"
+				
+				android:text="흔해빠진 직업흔해빠진 직업으로 세계 최강 8흔해빠진 직업으로 세계 최강 8흔해빠진 직업으로 세계 최강 8으로 세계 최강 8"
+				/>
+		
+		<TextView
+				android:id="@+id/publication_date_text_view"
+				
+				android:layout_width="match_parent"
+				android:layout_height="20dp"
+				
+				android:layout_weight="0"
+				android:layout_marginRight="10dp"
+				android:gravity="end"
+				
+				android:textSize="14sp"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/text_helper"
+				android:maxLines="1"
+				android:ellipsize="end"
+				
+				android:text="2019년 10월 1일"
+				
+				/>
+	
+	</LinearLayout>
+	
+	<LinearLayout
+			
+			android:id="@+id/editor_linear_layout"
+			
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:elevation="2dp"
+			android:layout_marginTop="0dp"
+			android:layout_marginRight="20dp"
+			android:layout_marginLeft="20dp"
+			android:layout_margin="20dp"
+			
+			app:layout_constraintLeft_toLeftOf="@+id/background_card_view"
+			app:layout_constraintRight_toRightOf="@+id/background_card_view"
+			app:layout_constraintTop_toBottomOf="@+id/info_linear_layout"
+			app:layout_constraintBottom_toBottomOf="@+id/background_card_view"
+			
+			>
+		<TextView
+				
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_marginRight="10dp"
+				android:layout_marginBottom="10dp"
+				
+				
+				android:textSize="16sp"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/text_helper"
+				android:ellipsize="end"
+				
+				android:text="에도의 자그마한 중고품 거래 및 대여점 '이즈모야'. 향로, 족자 같은 고급 장식품에서 그릇, 이불 등 일상용품까지 다양한 재고를 구비한 이 가게에는 한 가지 비밀이 있다. 만들어진지 백 년이 넘어 혼이 깃들고 요괴로 변한 '부상신'들이 중고품 속에 섞여 있다는 것. 이들은 겉보기에는 일반 사물과 같지만, 인간의 말을 알아듣고 각자 보고 들은 일에 대해 서로 수다를 떨기도 한다. 이즈모야의 주인 남매는 부상신들의 대화를 듣고 에도에 도는 온갖 소문을 알게 된다. 그러던 어느 날, 혼담 선물로 받은 귀한 세공품을 도둑맞았다는 무사의 의뢰가 들어오고, 남매는 고민 끝에 부상신이 들린 집기들을 무가의 저택에 대여하기로 한다."
+				
+				/>
+		<TextView
+				
+				android:layout_width="match_parent"
+				android:layout_height="20dp"
+				
+				android:layout_marginRight="10dp"
+				android:layout_marginBottom="10dp"
+				
+				android:textSize="16sp"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/text_high_emphasis"
+				android:maxLines="1"
+				android:ellipsize="end"
+				
+				android:text="우리가 추천하는 이유"
+				
+				/>
+		<TextView
+				
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_marginRight="10dp"
+				
+				android:textSize="16sp"
+				android:fontFamily="sans-serif-medium"
+				android:textColor="@color/text_helper"
+				android:ellipsize="end"
+				
+				android:text="1. 노력, 우정, 승리의 법칙의 발현\n2. 노력, 우정, 승리의 법칙의 발현\n3. 노력, 우정, 승리의 법칙의 발현"
+				
+				/>
+	</LinearLayout>
+	<android.support.v7.widget.CardView
+			android:id="@+id/background_card_view"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			
+			android:layout_marginTop="25dp"
+			android:layout_marginBottom="0dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			
+			
+			app:cardCornerRadius="4dp"
+			app:cardMaxElevation="1dp"
+			app:cardElevation="1dp"
+			app:cardPreventCornerOverlap="true"
+			app:cardUseCompatPadding="true"
+			
+			
+			android:background="@color/white"
+			>
+	</android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>
