@@ -432,22 +432,64 @@
 					android:layout_height="wrap_content"
 					android:layout_marginLeft="10dp"
 					
-					android:textSize="16sp"
+					android:textSize="20sp"
 					android:fontFamily="sans-serif-condensed-medium"
+					android:textStyle="bold"
 					android:textColor="@color/text_high_emphasis"
 					android:text="이 책의 시리즈 (총 16권)"
 					/>
-			
-			<TextView
-					android:textSize="16sp"
-					android:id="@+id/link_text_view"
-					android:fontFamily="sans-serif-medium"
-					android:textColor="@color/black"
+			<android.support.v7.widget.RecyclerView
+					android:id="@+id/series_recycler_view"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					
+					
+					android:layout_marginTop="10dp"
+					android:layout_marginLeft="10dp"
+					android:layout_marginRight="10dp"
+					android:layout_marginBottom="8dp"
+					>
+				
+			</android.support.v7.widget.RecyclerView>
+			<View
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:layout_marginTop="30dp"
+					android:layout_marginBottom="30dp"
+					
+					android:background="@color/divider"
+					app:elevation="2dp"
+					/>
+			
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="10dp"
+					
+					android:textSize="20sp"
+					android:fontFamily="sans-serif-condensed-medium"
+					android:textStyle="bold"
+					android:textColor="@color/text_high_emphasis"
+					android:text="이 책의 링크"
+					/>
+			
+			
+			<TextView
+					android:id="@+id/link_text_view"
+					
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					
+					android:layout_marginTop="10dp"
+					android:layout_marginLeft="10dp"
+					android:layout_marginRight="10dp"
+					android:layout_marginBottom="8dp"
+					
+					android:textSize="16sp"
+					android:fontFamily="sans-serif-medium"
+					android:textColor="@color/text_helper"
 					android:autoLink="web"
 					/>
-		
 		</LinearLayout>
 	
 	
