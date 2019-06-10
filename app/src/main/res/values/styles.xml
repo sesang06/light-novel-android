@@ -12,7 +12,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-      </style>
+    </style>
     
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <!-- Background for the search query section (e.g. EditText) -->
@@ -32,5 +32,21 @@
         <!--&lt;!&ndash; Layout for query suggestion rows &ndash;&gt;-->
         <!--<item name="suggestionRowLayout">...</item>-->
     </style>
-
+    <style name="expandedtoolbar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">45sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TransparentText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#00000000</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="GreyText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#666666</item>
+    </style>
+    
+    <style name="collapsedtoolbar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
 </resources>

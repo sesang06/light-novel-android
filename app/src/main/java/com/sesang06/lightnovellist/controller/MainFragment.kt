@@ -1,5 +1,6 @@
 package com.sesang06.lightnovellist.controller
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -8,15 +9,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.gson.Gson
+import com.sesang06.lightnovellist.LightNovelFeaturedInfoActivity
+import com.sesang06.lightnovellist.LightNovelRecommendInfoActivity
 import com.sesang06.lightnovellist.R
-import com.sesang06.lightnovellist.adapter.LightNovelAdapter
-import com.sesang06.lightnovellist.adapter.LightNovelFeaturedAdapter
-import com.sesang06.lightnovellist.adapter.LightNovelRecommendAdapter
-import com.sesang06.lightnovellist.adapter.LoadType
+import com.sesang06.lightnovellist.SearchLightNovelActivity
+import com.sesang06.lightnovellist.adapter.*
 import com.sesang06.lightnovellist.model.LightNovel
 import com.sesang06.lightnovellist.rx.AutoClearedDisposable
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
 import com.sesang06.lightnovellist.viewmodel.LightNovelListViewModelFactory
+import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 
@@ -26,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_main.view.*
 class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, LightNovelRecommendAdapter.ItemClickListener {
 
     internal val featuredAdapter by lazy {
-        LightNovelFeaturedAdapter().apply { setItemClickListener(this@MainFragment) }
+        LightNovelFeaturedAdapter().apply { setItemClickListener(featuredClickListener) }
     }
 
     internal val featuredLayoutManager by lazy {
@@ -38,6 +41,14 @@ class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, Lig
 //                return super.checkLayoutParams(lp)
 //            }
 //        }.apply { orientation = LinearLayoutManager.HORIZONTAL }
+    }
+
+    internal val featuredClickListener = object : LightNovelFeaturedAdapter.ItemClickListener {
+        override fun onItemClick(lightNovel: LightNovel) {
+            val intent = Intent(this@MainFragment.context, LightNovelFeaturedInfoActivity::class.java)
+            this@MainFragment.context?.startActivity(intent)
+
+        }
     }
 
     internal val recommendAdapter by lazy {
@@ -72,6 +83,13 @@ class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, Lig
         featuredAdapter.setItems(listOf(sampleLightNovel(),sampleLightNovel(),sampleLightNovel(), sampleLightNovel()))
         recommendAdapter.setItems(listOf(sampleLightNovel(),sampleLightNovel(),sampleLightNovel(), sampleLightNovel()))
         hitAdapter.setItems(listOf(sampleLightNovel(),sampleLightNovel(),sampleLightNovel(), sampleLightNovel()))
+
+        view.recommend_more_text_view.setOnClickListener { v: View? ->
+
+            val intent = Intent(this@MainFragment.context, LightNovelRecommendInfoActivity::class.java)
+            this@MainFragment.context?.startActivity(intent)
+
+        }
         return view
     }
 
