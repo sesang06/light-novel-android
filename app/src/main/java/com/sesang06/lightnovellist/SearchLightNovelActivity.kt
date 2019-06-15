@@ -29,8 +29,7 @@ class SearchLightNovelActivity : AppCompatActivity() {
             provideLightNovelListApi()
         )
     }
-    lateinit var resultViewModel: SearchLightNovelViewModel
-    lateinit var previewViewModel: SearchLightNovelViewModel
+    lateinit var viewModel: SearchLightNovelViewModel
 
     private val searchResultAdapter by lazy {
         LightNovelSearchResultAdapter().apply {
@@ -75,12 +74,12 @@ class SearchLightNovelActivity : AppCompatActivity() {
     internal val queryTextListener = object : android.widget.SearchView.OnQueryTextListener {
 
         override fun onQueryTextChange(newText: String): Boolean {
-            previewViewModel.load(newText)
+            viewModel.preview(newText)
             return false
         }
 
         override fun onQueryTextSubmit(query: String): Boolean {
-            resultViewModel.load(query)
+            viewModel.load(query)
             search_view.clearFocus()
             return true
         }
@@ -100,13 +99,13 @@ class SearchLightNovelActivity : AppCompatActivity() {
     }
 
     private val disposable = CompositeDisposable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        previewViewModel = ViewModelProviders.of(this, viewModelFactory)[SearchLightNovelViewModel::class.java]
-        resultViewModel = ViewModelProviders.of(this, viewModelFactory)[SearchLightNovelViewModel::class.java]
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[SearchLightNovelViewModel::class.java]
 
         search_preview_recycler_view.layoutManager = searchPreviewLayoutManager
         search_preview_recycler_view.adapter = searchPreviewAdapter
@@ -116,7 +115,7 @@ class SearchLightNovelActivity : AppCompatActivity() {
 
 
         disposable.add(
-            previewViewModel.lightNovels
+            viewModel.previewLightNovels
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { items ->
                     with(searchPreviewAdapter) {
@@ -131,7 +130,7 @@ class SearchLightNovelActivity : AppCompatActivity() {
         )
 
         disposable.add(
-            resultViewModel.lightNovels
+            viewModel.lightNovels
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { items ->
                     with(searchResultAdapter) {
