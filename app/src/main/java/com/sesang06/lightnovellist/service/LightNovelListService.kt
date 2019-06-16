@@ -10,15 +10,15 @@ import retrofit2.http.Query
 interface LightNovelListServiceApi {
 
     @GET("hit")
-    fun hit(@Query("last_id") lastId: Int): Observable<DataResponse<LightNovelList>>
+    fun hit(@Query("offset") offset: Int): Observable<DataResponse<LightNovelList>>
 
 
     @GET("recommend")
-    fun recommend(@Query("last_id") lastId: Int): Observable<DataResponse<LightNovelList>>
+    fun recommend(@Query("offset") offset: Int): Observable<DataResponse<LightNovelList>>
 
 
     @GET("new")
-    fun new(@Query("last_id") lastId: Int): Observable<DataResponse<LightNovelList>>
+    fun new(@Query("offset") offset: Int): Observable<DataResponse<LightNovelList>>
 
     @GET("light_novel")
     fun lightNovel(@Query("id") id: Int): Observable<DataResponse<LightNovelResponse>>

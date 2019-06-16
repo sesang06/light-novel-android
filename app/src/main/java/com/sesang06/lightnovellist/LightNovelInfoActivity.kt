@@ -16,12 +16,15 @@ import com.sesang06.lightnovellist.service.provideLightNovelListApi
 import com.sesang06.lightnovellist.viewmodel.LightNovelInfoViewModel
 import com.sesang06.lightnovellist.viewmodel.LightNovelInfoViewModelFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_light_novel_info.*
 
 class LightNovelInfoActivity : AppCompatActivity() {
     companion object {
         const val KEY_ID = "key_id"
     }
+
+    private val compositeDisposable = CompositeDisposable()
 
     internal val viewModelFactory by lazy {
         LightNovelInfoViewModelFactory(
@@ -64,7 +67,6 @@ class LightNovelInfoActivity : AppCompatActivity() {
 
         series_recycler_view.adapter = seriesAdapter
         series_recycler_view.layoutManager = seriesLayoutManager
-        seriesAdapter.setItems(listOf(sampleLightNovel(),sampleLightNovel(),sampleLightNovel()))
 
         val id = intent.getIntExtra(KEY_ID, 0)
         viewModel.load(id)
@@ -79,7 +81,11 @@ class LightNovelInfoActivity : AppCompatActivity() {
             index_expand_text_view.visibility = View.GONE
             index_text_view.maxLines = Integer.MAX_VALUE
         }
-        viewModel.lightNovel
+        publisher_description_expand_text_view.setOnClickListener { view: View? ->
+            publisher_description_expand_text_view.visibility = View.GONE
+            publisher_description_text_view.maxLines = Integer.MAX_VALUE
+        }
+        val disposeable = viewModel.lightNovel
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { lightNovel ->
                 toolbar.title = lightNovel.title
@@ -95,7 +101,32 @@ class LightNovelInfoActivity : AppCompatActivity() {
                 val publicationDateString = sdf.format(lightNovel.publicationDate)
                 publication_date_text_view.text = publicationDateString
                 link_text_view.text = lightNovel.link
+
+                if (lightNovel.indexDescription.isEmpty()) {
+                    index_constraint_layout.visibility = View.GONE
+                } else {
+                    index_constraint_layout.visibility = View.VISIBLE
+                }
+                index_text_view.text = lightNovel.indexDescription
+
+                if (lightNovel.publisherDescription.isEmpty()) {
+                    publisher_description_constraint_layout.visibility = View.GONE
+                } else {
+                    publisher_description_constraint_layout.visibility = View.VISIBLE
+                }
+                publisher_description_text_view.text = lightNovel.publisherDescription
+
+                if (lightNovel.series.id == 0) {
+                    series_linear_layout.visibility = View.GONE
+                } else {
+                    series_linear_layout.visibility = View.VISIBLE
+                    val size = lightNovel.series.lightNovels.size + 1
+                    series_title_view.text = "이 책의 시리즈 (총 "+ size.toString() + "권)"
+                    seriesAdapter.setItems(lightNovel.series.lightNovels)
+                    seriesAdapter.notifyDataSetChanged()
+                }
             }
+        compositeDisposable.add(disposeable)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -107,9 +138,14 @@ class LightNovelInfoActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun sampleLightNovel(): LightNovel {
-        val gson = Gson()
-        return gson.fromJson("{\"id\":25,\"title\":\"무직전생 18 - Premium Extreme Novel\",\"description\":\"강적을 물리치고, 아리엘을 다음 아슬라 왕으로 만들라는 임무를 완수한 루데우스. 그 이후로도 수많은 지령을 수행하거나 노예 상인에게서 리니아를 구해 주다 보니, 1년 반이 흘렀다. 그런 어느 날, 리니아는 돌디어족 마을에서 보낸 편지를 받는데...\",\"publication_date\":\"2019-06-10T00:00:00.000Z\",\"thumbnail\":\"https://image.aladin.co.kr/product/19345/67/cover500/k982635813_1.jpg\",\"recommend_rank\":0,\"created_at\":\"2019-05-29T16:33:47.000Z\",\"updated_at\":\"2019-05-29T16:33:47.000Z\",\"author_id\":24,\"publisher_id\":10,\"author\":{\"id\":24,\"name\":\"리후진 나 마고노테 (지은이), 시로타카 (그림), 한신남 (옮긴이)\",\"created_at\":\"2019-05-29T16:33:47.000Z\",\"updated_at\":\"2019-05-29T16:33:47.000Z\"},\"publisher\":{\"id\":10,\"name\":\"학산문화사(라이트노벨)\",\"created_at\":\"2019-05-29T16:33:47.000Z\",\"updated_at\":\"2019-05-29T16:33:47.000Z\"},\"categories\":[]}",
-            LightNovel::class.java)
+    override fun onStop() {
+        super.onStop()
+        compositeDisposable.clear()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Glide.with(this.applicationContext).pauseRequests()
     }
 }
