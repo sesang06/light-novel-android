@@ -5,6 +5,7 @@ import com.sesang06.lightnovellist.model.LightNovelList
 import com.sesang06.lightnovellist.model.LightNovelResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface LightNovelListServiceApi {
@@ -20,10 +21,10 @@ interface LightNovelListServiceApi {
     @GET("new")
     fun new(@Query("offset") offset: Int): Observable<DataResponse<LightNovelList>>
 
-    @GET("light_novel")
-    fun lightNovel(@Query("id") id: Int): Observable<DataResponse<LightNovelResponse>>
+    @GET("light_novel/{id}")
+    fun lightNovel(@Path("id") id: Int): Observable<DataResponse<LightNovelResponse>>
 
     @GET("search")
-    fun search(@Query("query") query: String): Observable<DataResponse<LightNovelList>>
+    fun search(@Query("query") query: String, @Query("offset") offset: Int): Observable<DataResponse<LightNovelList>>
 
 }

@@ -24,22 +24,25 @@ interface SearchLightNovelViewModelType {
 
     fun preview(query: String)
     fun load(query: String): Disposable
+    fun loadMore(): Disposable
 }
 
 class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel(),
     SearchLightNovelViewModelType {
 
     override val previewLightNovels: Observable<List<LightNovel>>
-    get() =
-    query.throttleLast(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-    .flatMap {
-            query -> api.search(query)
-    }
-    .map { response: DataResponse<LightNovelList> ->
-        response.data.list
-    }
-    .doOnSubscribe { isLoading.onNext(true) }
-    .doOnTerminate { isLoading.onNext(false) }
+        get() =
+            query
+                .distinctUntilChanged()
+                .throttleLast(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+                .doOnNext { isLoading.onNext(true) }
+                .flatMap { query ->
+                    api.search(query, 0)
+                }
+                .map { response: DataResponse<LightNovelList> ->
+                    response.data.list
+                }
+                .doOnNext { isLoading.onNext(false) }
 
     override val lightNovels: BehaviorSubject<List<LightNovel>> = BehaviorSubject.create()
     override val isLastPage: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
@@ -48,6 +51,7 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
     val query: PublishSubject<String> = PublishSubject.create()
 
 
+    val lastSearchQuery: BehaviorSubject<String> = BehaviorSubject.create()
     override fun preview(query: String) {
         if (query.isNotEmpty()) {
             this.query.onNext(query)
@@ -58,7 +62,8 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
         val compositeDisposable = CompositeDisposable()
 
         if (query.isNotEmpty()) {
-            val request = api.search(query)
+            lastSearchQuery.onNext(query)
+            val request = api.search(query, 0)
                 .doOnSubscribe { isLoading.onNext(true) }
                 .doOnTerminate { isLoading.onNext(false) }
                 .share()
@@ -67,16 +72,13 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
                     .map { response: DataResponse<LightNovelList> ->
                         response.data.list
                     }
-//                    .withLatestFrom(lightNovels, BiFunction { append: List<LightNovel>, current: List<LightNovel> ->
-//                        current + append
-//                    })
                     .subscribe { items ->
                         lightNovels.onNext(items)
                     }
             )
             compositeDisposable.add(
                 request
-                    .map  { response: DataResponse<LightNovelList> ->
+                    .map { response: DataResponse<LightNovelList> ->
                         response.data.isLastPage
                     }
                     .subscribe { value ->
@@ -84,6 +86,38 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
                     }
             )
         }
+        return compositeDisposable
+    }
+
+    override fun loadMore(): Disposable {
+        val offset = lightNovels.value?.size ?: 0
+        val query = lastSearchQuery.value ?: ""
+        val request = api.search(query, offset)
+            .doOnSubscribe { isLoading.onNext(true) }
+            .doOnTerminate { isLoading.onNext(false) }
+            .share()
+        val compositeDisposable = CompositeDisposable()
+        compositeDisposable.add(
+            request
+                .map { response: DataResponse<LightNovelList> ->
+                    response.data.list
+                }
+                .withLatestFrom(lightNovels, BiFunction { append: List<LightNovel>, current: List<LightNovel> ->
+                    current + append
+                })
+                .subscribe { items ->
+                    lightNovels.onNext(items)
+                }
+        )
+        compositeDisposable.add(
+            request
+                .map { response: DataResponse<LightNovelList> ->
+                    response.data.isLastPage
+                }
+                .subscribe { value ->
+                    isLastPage.onNext(value)
+                }
+        )
         return compositeDisposable
     }
 }
