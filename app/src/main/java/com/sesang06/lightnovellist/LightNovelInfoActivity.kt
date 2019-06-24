@@ -18,6 +18,9 @@ import com.sesang06.lightnovellist.viewmodel.LightNovelInfoViewModelFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_light_novel_info.*
+import kotlinx.android.synthetic.main.activity_light_novel_info.toolbar
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_search.*
 
 class LightNovelInfoActivity : AppCompatActivity() {
     companion object {
@@ -61,8 +64,11 @@ class LightNovelInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_light_novel_info)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar.title = ""
+        toolbar.subtitle = ""
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         viewModel = ViewModelProviders.of(this, viewModelFactory)[LightNovelInfoViewModel::class.java]
 
         series_recycler_view.adapter = seriesAdapter

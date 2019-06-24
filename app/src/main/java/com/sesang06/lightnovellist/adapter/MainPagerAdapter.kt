@@ -14,12 +14,12 @@ enum class LoadType {
 
 class MainPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
     override fun getCount(): Int {
-        return 3
+        return 2
     }
 
     override fun getItem(p0: Int): Fragment {
         when (p0) {
-            0 -> return MainFragment()
+            0 -> return NewLightNovelListFragment()
             1 -> return HitLightNovelListFragment()
             2 -> return NewLightNovelListFragment()
         }

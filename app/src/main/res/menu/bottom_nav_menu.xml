@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 	  xmlns:app="http://schemas.android.com/apk/res-auto">
-	<item
-			android:id="@+id/action_recommend"
-			android:enabled="true"
-			android:icon="@drawable/ic_home_black_24dp"
-			android:title="홈"
-			app:showAsAction="ifRoom" />
-	<item
-			android:id="@+id/action_hot"
-			android:enabled="true"
-			android:icon="@drawable/ic_whatshot_black_24dp"
-			android:title="인기"
-			app:showAsAction="ifRoom" />
+	<!--<item-->
+			<!--android:id="@+id/action_recommend"-->
+			<!--android:enabled="true"-->
+			<!--android:icon="@drawable/ic_home_black_24dp"-->
+			<!--android:title="홈"-->
+			<!--app:showAsAction="ifRoom" />-->
 	<item
 			android:id="@+id/action_new"
 			android:enabled="true"
@@ -20,4 +14,11 @@
 			android:title="신작"
 			app:showAsAction="ifRoom" />
 	
+	<item
+			android:id="@+id/action_hot"
+			android:enabled="true"
+			android:icon="@drawable/ic_whatshot_black_24dp"
+			android:title="인기"
+			app:showAsAction="ifRoom" />
+
 </menu>
