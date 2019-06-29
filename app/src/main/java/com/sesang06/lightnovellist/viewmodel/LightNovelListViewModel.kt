@@ -29,17 +29,17 @@ class LightNovelListViewModel(val api: LightNovelListServiceApi, val loadType: L
     override val isLastPage: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
     override val isLoading: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
 
-    override fun request(lastId: Int): Observable<DataResponse<LightNovelList>> {
+    override fun request(offset: Int): Observable<DataResponse<LightNovelList>> {
         return when (loadType) {
-            LoadType.HIT -> api.hit(lastId)
-            LoadType.RECOMMEND -> api.recommend(lastId)
-            LoadType.NEW -> api.new(lastId)
+            LoadType.HIT -> api.hit(offset)
+            LoadType.RECOMMEND -> api.recommend(offset)
+            LoadType.NEW -> api.new(offset)
         }
     }
 
     override fun loadMore(): Disposable {
-        val lastId = lightNovels.value?.last()?.id ?: 0
-        val request = request(lastId)
+        val offset = lightNovels.value?.size ?: 0
+        val request = request(offset)
             .doOnSubscribe { isLoading.onNext(true) }
             .doOnTerminate { isLoading.onNext(false) }
             .share()

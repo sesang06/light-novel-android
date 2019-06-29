@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.transition.Visibility
 import android.view.View
 import android.widget.SearchView
@@ -21,6 +22,8 @@ import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.activity_search.search_view
 import kotlinx.android.synthetic.main.activity_search.toolbar
 import kotlinx.android.synthetic.main.activity_search_result.*
+import kotlinx.android.synthetic.main.fragment_light_novel.view.*
+
 
 class SearchLightNovelActivity : AppCompatActivity() {
 
@@ -86,19 +89,11 @@ class SearchLightNovelActivity : AppCompatActivity() {
 
     }
 
-    internal val queryFocusListener = object : View.OnFocusChangeListener {
-        override fun onFocusChange(v: View?, hasFocus: Boolean) {
-            if (hasFocus) {
-                search_result_recycler_view.visibility = View.GONE
-                search_preview_recycler_view.visibility = View.VISIBLE
-            } else {
-                search_result_recycler_view.visibility = View.VISIBLE
-                search_preview_recycler_view.visibility = View.GONE
-            }
-        }
-    }
+
 
     private val disposable = CompositeDisposable()
+    private lateinit var scrollListener: RecyclerView.OnScrollListener
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,6 +109,19 @@ class SearchLightNovelActivity : AppCompatActivity() {
         search_result_recycler_view.adapter = searchResultAdapter
 
 
+        scrollListener = object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val totalItemCount = searchResultLayoutManager.itemCount
+                if (totalItemCount == searchResultLayoutManager.findLastVisibleItemPosition() + 1) {
+                    if (viewModel.isLoading.value == false) {
+                        viewModel.loadMore()
+                        recyclerView.removeOnScrollListener(scrollListener)
+                    }
+
+                }
+            }
+        }
         disposable.add(
             viewModel.previewLightNovels
                 .observeOn(AndroidSchedulers.mainThread())
@@ -121,7 +129,9 @@ class SearchLightNovelActivity : AppCompatActivity() {
                     with(searchPreviewAdapter) {
                         if (items.isEmpty()) {
                             clearItems()
+                            search_result_empty_text_view.visibility = View.VISIBLE
                         } else {
+                            search_result_empty_text_view.visibility = View.GONE
                             setItems(items)
                         }
                         notifyDataSetChanged()
@@ -139,7 +149,21 @@ class SearchLightNovelActivity : AppCompatActivity() {
                         } else {
                             setItems(items)
                         }
+                        if (viewModel.isLastPage.value == false) {
+                            search_result_recycler_view.addOnScrollListener(scrollListener)
+                        }
                         notifyDataSetChanged()
+                    }
+                }
+        )
+
+        disposable.add(
+            viewModel.isLoading
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { isLoading ->
+                    light_novel_progress_bar.visibility = when (isLoading) {
+                        true -> View.VISIBLE
+                        false -> View.GONE
                     }
                 }
         )
@@ -157,32 +181,20 @@ class SearchLightNovelActivity : AppCompatActivity() {
         search_view.setOnQueryTextListener(queryTextListener)
         search_view.setOnQueryTextFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                search_result_recycler_view.visibility = View.GONE
+                search_result_constraint_layout.visibility = View.GONE
                 search_preview_recycler_view.visibility = View.VISIBLE
             } else {
-                search_result_recycler_view.visibility = View.VISIBLE
+                search_result_constraint_layout.visibility = View.VISIBLE
                 search_preview_recycler_view.visibility = View.GONE
+                search_view.setQuery(viewModel.lastSearchQuery.value ?: "", false)
             }
 
         }
     }
 
     override fun onBackPressed() {
-        if (search_view.isFocused){
-            search_view.clearFocus()
-            return
-        }
         super.onBackPressed()
     }
 
-//    override fun onItemClick(lightNovel: LightNovel) {
-//        val query = search_view.query.toString()
-//
-//        val intent = Intent(this, SearchResultActivity::class.java).apply {
-//            putExtra( SearchResultActivity.KEY_QUERY, query)
-//
-//        }
-//        this.startActivity(intent)
-//    }
 
 }

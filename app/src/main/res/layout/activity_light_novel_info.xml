@@ -108,7 +108,6 @@
 						
 						android:textStyle="bold"
 						
-						android:text="던전에서 만남을 추구하면 안 되는 걸까"
 						/>
 				
 				<TextView
@@ -132,9 +131,6 @@
 						android:fontFamily="sans-serif-medium"
 						android:textColor="@color/text_helper"
 						android:layout_marginBottom="8dp"
-						
-						android:text="오모리 후지노"
-						
 						
 						/>
 			
@@ -187,7 +183,6 @@
 						android:textSize="16sp"
 						android:fontFamily="sans-serif"
 						android:textColor="@color/text_helper"
-						android:text="대원씨아이"
 						/>
 			</LinearLayout>
 			
@@ -226,25 +221,26 @@
 						android:textSize="16sp"
 						android:fontFamily="sans-serif"
 						android:textColor="@color/text_helper"
-						android:text="2019-04-40"
 						/>
 			</LinearLayout>
 			
-			<View
-					android:layout_width="match_parent"
-					android:layout_height="1dp"
-					
-					android:layout_marginTop="20dp"
-					android:layout_marginBottom="20dp"
-					
-					android:background="@color/divider"
-					app:elevation="2dp"
-					/>
+		
 			
 			<android.support.constraint.ConstraintLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:layout_marginTop="20dp"
+					
 					>
+				<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						
+						
+						android:background="@color/divider"
+						app:elevation="2dp"
+						app:layout_constraintTop_toTopOf="parent"
+						/>
 				<TextView
 						android:id="@+id/description_title_text_view"
 						
@@ -256,7 +252,7 @@
 						app:layout_constraintRight_toLeftOf="@+id/description_expand_text_view"
 						app:layout_constraintBottom_toTopOf="@+id/description_text_view"
 						
-						
+						android:layout_marginTop="20dp"
 						android:layout_marginLeft="10dp"
 						
 						android:textSize="20sp"
@@ -310,34 +306,28 @@
 						android:textColor="@color/text_helper"
 						android:maxLines="3"
 						android:ellipsize="end"
-						android:text="
-벨이 없는 『모험』, 그리고 고립무원의 벨과 류.
-그들의 앞을 가로막는 최흉(最凶)의 사태는?!
-
-“몬스터렉스── 암피스바에나!”
-절망의 『예언』은 끝나지 않았다.
-참혹한 연회가 되풀이되었던 제27계층에서 일어난 새로운 이상 현상. 퇴로를 차단당한 릴리 일행은 벨이 없는 동안 『모험』을 할 수밖에 없게 되었다.
-“심층…….”
-한편 벨과 류를 기다리는 가혹한 이름은 『제37계층』. 고독, 고립, 고통. 최악의 무대에서 막을 연 최악의 결사행. 그리고 밀려오는 【재앙】의 그림자. 전에 없던 가혹한 시련에 희롱당하는 가운데, 류는 삶과 죽음의 틈바구니에서 과거의 광경을 보았다.
-“나에게는, 이제…… 『정의』가 없어.”
-이것은 소년이 걷고 여신이 기록한
-──【파밀리아 미스】──"
+					
 						/>
 			
 			</android.support.constraint.ConstraintLayout>
-			
-			<View
-					android:layout_width="match_parent"
-					android:layout_height="1dp"
-					android:background="@color/divider"
-					android:layout_marginTop="20dp"
-					android:layout_marginBottom="20dp"
-					app:elevation="2dp"
-					/>
+		
 			<android.support.constraint.ConstraintLayout
+					android:id="@+id/index_constraint_layout"
+					
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:layout_marginTop="20dp"
+					
 					>
+				<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						
+						
+						android:background="@color/divider"
+						app:elevation="2dp"
+						app:layout_constraintTop_toTopOf="parent"
+						/>
 				<TextView
 						android:id="@+id/index_title_text_view"
 						
@@ -349,6 +339,7 @@
 						app:layout_constraintRight_toLeftOf="@+id/index_expand_text_view"
 						app:layout_constraintBottom_toTopOf="@+id/index_text_view"
 						
+						android:layout_marginTop="20dp"
 						android:layout_marginLeft="10dp"
 						
 						android:textSize="20sp"
@@ -404,53 +395,142 @@
 						android:maxLines="3"
 						android:ellipsize="end"
 						
-						android:text="막간 움직이기 시작한 이들\n7장 절망의 노래 초월의 노래\n8장 망치의 목소리\n
-9장 헬로우 심층
-10장 백색마궁
-간장 정의의 추억
-11장 살의의 행방
-간장 정의의 추상
-12장 진(眞) 미궁결사행
-13장 일천 어둠을 넘어서
-에필로그 You’ll be back II"
+						/>
+			
+			</android.support.constraint.ConstraintLayout>
+			<android.support.constraint.ConstraintLayout
+					android:id="@+id/publisher_description_constraint_layout"
+					
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="20dp"
+					
+					>
+				<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						
+						
+						android:background="@color/divider"
+						app:elevation="2dp"
+						app:layout_constraintTop_toTopOf="parent"
+						/>
+				<TextView
+						android:id="@+id/publisher_description_title_text_view"
+						
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						
+						app:layout_constraintTop_toTopOf="parent"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toLeftOf="@+id/publisher_description_expand_text_view"
+						app:layout_constraintBottom_toTopOf="@+id/publisher_description_text_view"
+						
+						android:layout_marginTop="20dp"
+						android:layout_marginLeft="10dp"
+						
+						android:textSize="20sp"
+						android:fontFamily="sans-serif-condensed-medium"
+						android:textStyle="bold"
+						android:textColor="@color/text_high_emphasis"
+						android:text="출판사 제공 책 소개"
+						
+						/>
+				
+				<TextView
+						android:id="@+id/publisher_description_expand_text_view"
+						
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						
+						app:layout_constraintLeft_toRightOf="@+id/publisher_description_title_text_view"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintTop_toTopOf="@+id/publisher_description_title_text_view"
+						app:layout_constraintBottom_toBottomOf="@+id/publisher_description_title_text_view"
+						android:layout_marginRight="10dp"
+						
+						android:gravity="center_horizontal"
+						android:textSize="15sp"
+						android:fontFamily="sans-serif-condensed-medium"
+						
+						android:textColor="@color/text_helper"
+						android:text="더 보기"
+						
+						/>
+				
+				
+				
+				<TextView
+						android:id="@+id/publisher_description_text_view"
+						
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						
+						app:layout_constraintTop_toBottomOf="@+id/publisher_description_title_text_view"
+						app:layout_constraintLeft_toLeftOf="parent"
+						app:layout_constraintRight_toRightOf="parent"
+						app:layout_constraintBottom_toBottomOf="parent"
+						
+						android:layout_marginTop="10dp"
+						android:layout_marginLeft="10dp"
+						android:layout_marginRight="10dp"
+						android:layout_marginBottom="8dp"
+						
+						android:textSize="16sp"
+						android:fontFamily="sans-serif-medium"
+						android:textColor="@color/text_helper"
+						android:maxLines="3"
+						android:ellipsize="end"
+						
 						/>
 			
 			</android.support.constraint.ConstraintLayout>
 			
-			<View
-					android:layout_width="match_parent"
-					android:layout_height="1dp"
-					android:layout_marginTop="30dp"
-					android:layout_marginBottom="30dp"
-					
-					android:background="@color/divider"
-					app:elevation="2dp"
-					/>
-			
-			<TextView
+			<LinearLayout
+					android:id="@+id/series_linear_layout"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginLeft="10dp"
-					
-					android:textSize="20sp"
-					android:fontFamily="sans-serif-condensed-medium"
-					android:textStyle="bold"
-					android:textColor="@color/text_high_emphasis"
-					android:text="이 책의 시리즈 (총 16권)"
-					/>
-			<android.support.v7.widget.RecyclerView
-					android:id="@+id/series_recycler_view"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					
-					
-					android:layout_marginTop="10dp"
-					android:layout_marginLeft="10dp"
-					android:layout_marginRight="10dp"
-					android:layout_marginBottom="8dp"
+					android:orientation="vertical"
 					>
 				
-			</android.support.v7.widget.RecyclerView>
+				<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:layout_marginTop="30dp"
+						android:layout_marginBottom="30dp"
+						
+						android:background="@color/divider"
+						app:elevation="2dp"
+						/>
+				
+				<TextView
+						android:id="@+id/series_title_view"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="10dp"
+						
+						android:textSize="20sp"
+						android:fontFamily="sans-serif-condensed-medium"
+						android:textStyle="bold"
+						android:textColor="@color/text_high_emphasis"
+						android:text="이 책의 시리즈"
+						/>
+				
+				<android.support.v7.widget.RecyclerView
+						android:id="@+id/series_recycler_view"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						
+						
+						android:layout_marginTop="10dp"
+						android:layout_marginLeft="10dp"
+						android:layout_marginRight="10dp"
+						android:layout_marginBottom="8dp"
+						>
+				
+				</android.support.v7.widget.RecyclerView>
+			</LinearLayout>
+			
 			<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"

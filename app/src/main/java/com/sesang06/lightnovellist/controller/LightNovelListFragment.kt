@@ -31,8 +31,6 @@ abstract class LightNovelListFragment : Fragment(), LightNovelAdapter.ItemClickL
     private lateinit var scrollListener: RecyclerView.OnScrollListener
     internal val viewDisposables = AutoClearedDisposable(this, false)
     abstract internal val loadType: LoadType
-    private val lastVisibleItemPosition: Int
-        get() = layoutManager.findLastVisibleItemPosition()
     internal val viewModelFactory by lazy {
         LightNovelListViewModelFactory(
             provideLightNovelListApi(), loadType

@@ -43,5 +43,11 @@ data class LightNovel(
     @SerializedName("adult")
     val adult: Boolean = false,
     @SerializedName("author_id")
-    val authorId: Int = 0
+    val authorId: Int = 0,
+    @SerializedName("publisher_description")
+    val publisherDescription: String = "",
+    @SerializedName("index_description")
+    val indexDescription: String = "",
+    @SerializedName("series")
+    val series: LightNovelSeries
 )
