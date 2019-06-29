@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">라노벨 목록</string>
     <string name="search_result_empty_view">검색한 결과가 없습니다.</string>
+    <string name="default_notification_channel_id">light_novel_default_notification_channel</string>
 </resources>
