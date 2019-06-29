@@ -8,3 +8,5 @@ data class DataResponse<T>(@SerializedName("code")
                         val data: T,
                                   @SerializedName("message")
                         val message: String = "")
+
+data class Empty

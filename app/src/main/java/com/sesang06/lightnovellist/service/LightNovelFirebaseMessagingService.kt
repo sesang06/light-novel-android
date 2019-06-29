@@ -13,8 +13,14 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.sesang06.lightnovellist.MainActivity
 import com.sesang06.lightnovellist.R
+import io.reactivex.disposables.CompositeDisposable
 
 class LightNovelFirebaseMessagingService: FirebaseMessagingService() {
+
+
+    private val tokenManager = TokenManager()
+
+    private val compositeDisposable = CompositeDisposable()
 
     /**
      * Called when message is received.
@@ -87,7 +93,11 @@ class LightNovelFirebaseMessagingService: FirebaseMessagingService() {
      * @param token The new token.
      */
     private fun sendRegistrationToServer(token: String?) {
-        // TODO: Implement this method to send token to your app server.
+        token?.let {
+            compositeDisposable.add(
+                tokenManager.sendToken(it)
+            )
+        }
     }
 
     /**

@@ -7,12 +7,24 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.google.firebase.iid.FirebaseInstanceId
 import com.sesang06.lightnovellist.adapter.MainPagerAdapter
+import com.sesang06.lightnovellist.service.TokenManager
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.firebase.internal.FirebaseAppHelper.getToken
+import com.google.firebase.iid.InstanceIdResult
+import com.google.android.gms.tasks.OnSuccessListener
+
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var pagerAdapter: MainPagerAdapter
+
+    private val tokenManager = TokenManager()
+
+    private val compositeDisposable = CompositeDisposable()
 
     private var navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -51,6 +63,14 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        sendTokenIfNeeded()
+    }
+
+    fun sendTokenIfNeeded() {
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val token = instanceIdResult.token
+            tokenManager.sendToken(token)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
