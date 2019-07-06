@@ -46,7 +46,9 @@ class LightNovelFirebaseMessagingService: FirebaseMessagingService() {
         // Check if message contains a data payload.
         remoteMessage?.data?.isNotEmpty()?.let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
-
+            remoteMessage?.data?.let {
+                sendNotification(it)
+            }
             handleNow()
         }
 
@@ -105,22 +107,36 @@ class LightNovelFirebaseMessagingService: FirebaseMessagingService() {
      *
      * @param messageBody FCM message body received.
      */
-    private fun sendNotification(messageBody: String) {
+    private fun sendNotification(message: Map<String, String>) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
             PendingIntent.FLAG_ONE_SHOT)
 
+
+        val title = message["title"]
+        val detailMessage = message["detail_message"]
+        val message = message["message"]
+
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-//            .setContentTitle(getString(R.string.fcm_message))
-            .setContentText(messageBody)
-            .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
 
+        title.let {
+            notificationBuilder.setContentTitle(it)
+        }
+
+        message.let {
+            notificationBuilder.setContentText(it)
+        }
+
+        detailMessage.let {
+            notificationBuilder.setStyle(NotificationCompat.BigTextStyle()
+                .bigText(it))
+        }
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         // Since android Oreo notification channel is needed.

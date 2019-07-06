@@ -9,4 +9,4 @@ data class DataResponse<T>(@SerializedName("code")
                                   @SerializedName("message")
                         val message: String = "")
 
-data class Empty
+class Empty()

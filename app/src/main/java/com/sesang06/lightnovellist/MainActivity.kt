@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.google.firebase.internal.FirebaseAppHelper.getToken
 import com.google.firebase.iid.InstanceIdResult
 import com.google.android.gms.tasks.OnSuccessListener
-
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class MainActivity : AppCompatActivity() {
@@ -64,6 +64,17 @@ class MainActivity : AppCompatActivity() {
         })
 
         sendTokenIfNeeded()
+
+        FirebaseMessaging.getInstance().subscribeToTopic("dailyReport")
+            .addOnCompleteListener { task ->
+//                var msg = getString(R.string.msg_subscribed)
+                if (!task.isSuccessful) {
+//                    msg = getString(R.string.msg_subscribe_failed)
+                }
+//                Log.d(TAG, msg)
+//                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+            }
+
     }
 
     fun sendTokenIfNeeded() {

@@ -27,6 +27,6 @@ interface LightNovelListServiceApi {
     fun search(@Query("query") query: String, @Query("offset") offset: Int): Observable<DataResponse<LightNovelList>>
 
     @FormUrlEncoded
-    @POST("/token_info")
+    @POST("token_info")
     fun tokenInfo(@Field("token") token: String): Observable<DataResponse<Empty>>
 }
