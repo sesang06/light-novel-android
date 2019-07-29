@@ -1,6 +1,6 @@
 # 라이트노벨 신간 목록 안드로이드 앱
 
-![메인](/screenshot/2.png){: width="100" height="100"}
+<img src="/screenshot/2.png" width="200">
 
 ## (충격, 경악) 라이트노벨 신간을 볼 수 있는 안드로이드 앱이 있다? 뿌슝빠슝
 
@@ -28,12 +28,12 @@ https://github.com/sesang06/light-novel-sql-script
 
 - 신간 보기
 - 인기 보기
-  - ![전체](/screenshot/1.png){: width="100" height="100"}
+  - <img src="/screenshot/1.png" width="200">
 - 카톡으로 공유 (공유하고 인싸가 되어보자)
-  - ![카톡](/screenshot/4.png){: width="100" height="100"}
+  - <img src="/screenshot/4.png" width="200">
 - 상세 페이지 캡처 (공유하고 인싸가 되어보자)
 - 검색
-  - ![검색](/screenshot/3.png){: width="100" height="100"}
+  - <img src="/screenshot/3.png" width="200">
 - 신간 알람
   - 크롬탭으로 긁어서 알람 보냅니다.
 
