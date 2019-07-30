@@ -37,7 +37,7 @@ https://github.com/sesang06/light-novel-sql-script
 - 신간 알람
   - 크롬탭으로 긁어서 알람 보냅니다.
 
-### (기괴, 공포) 이 리드미를 쓰는 나조차도 별로 관심 기술스택
+### [기괴, 공포] 라이트노벨 신간 앱 개발자 본인조차도 별로 관심이  기술스택
 
 - rxJava2, retrofit, kotlin, nodejs, koa, elastic search
 
