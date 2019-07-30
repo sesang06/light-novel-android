@@ -1,12 +1,11 @@
 package com.sesang06.lightnovellist.service
 
 import com.sesang06.lightnovellist.model.DataResponse
+import com.sesang06.lightnovellist.model.Empty
 import com.sesang06.lightnovellist.model.LightNovelList
 import com.sesang06.lightnovellist.model.LightNovelResponse
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface LightNovelListServiceApi {
 
@@ -27,4 +26,7 @@ interface LightNovelListServiceApi {
     @GET("search")
     fun search(@Query("query") query: String, @Query("offset") offset: Int): Observable<DataResponse<LightNovelList>>
 
+    @FormUrlEncoded
+    @POST("token_info")
+    fun tokenInfo(@Field("token") token: String): Observable<DataResponse<Empty>>
 }
