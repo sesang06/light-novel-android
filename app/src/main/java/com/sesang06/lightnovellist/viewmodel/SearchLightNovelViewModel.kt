@@ -72,18 +72,22 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
                     .map { response: DataResponse<LightNovelList> ->
                         response.data.list
                     }
-                    .subscribe { items ->
+                    .subscribe( { items ->
                         lightNovels.onNext(items)
-                    }
+                    }, {
+
+                    })
             )
             compositeDisposable.add(
                 request
                     .map { response: DataResponse<LightNovelList> ->
                         response.data.isLastPage
                     }
-                    .subscribe { value ->
+                    .subscribe( { value ->
                         isLastPage.onNext(value)
-                    }
+                    }, {
+
+                    })
             )
         }
         return compositeDisposable
@@ -105,18 +109,22 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
                 .withLatestFrom(lightNovels, BiFunction { append: List<LightNovel>, current: List<LightNovel> ->
                     current + append
                 })
-                .subscribe { items ->
+                .subscribe( { items ->
                     lightNovels.onNext(items)
-                }
+                }, {
+
+                })
         )
         compositeDisposable.add(
             request
                 .map { response: DataResponse<LightNovelList> ->
                     response.data.isLastPage
                 }
-                .subscribe { value ->
+                .subscribe( { value ->
                     isLastPage.onNext(value)
-                }
+                }, {
+
+                })
         )
         return compositeDisposable
     }

@@ -13,6 +13,7 @@ import com.sesang06.lightnovellist.LightNovelInfoActivity
 import com.sesang06.lightnovellist.R
 import com.sesang06.lightnovellist.adapter.LightNovelAdapter
 import com.sesang06.lightnovellist.adapter.LoadType
+import com.sesang06.lightnovellist.model.BookType
 import com.sesang06.lightnovellist.model.LightNovel
 import com.sesang06.lightnovellist.rx.AutoClearedDisposable
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
@@ -23,14 +24,19 @@ import kotlinx.android.synthetic.main.fragment_light_novel.view.*
 
 abstract class LightNovelListFragment : Fragment(), LightNovelAdapter.ItemClickListener {
 
+    abstract internal val loadType: LoadType
+
+    abstract internal val bookType: BookType
+
     internal val adapter by lazy {
         LightNovelAdapter().apply { setItemClickListener(this@LightNovelListFragment) }
     }
 
     internal val disposeables = AutoClearedDisposable(this)
+
     private lateinit var scrollListener: RecyclerView.OnScrollListener
+
     internal val viewDisposables = AutoClearedDisposable(this, false)
-    abstract internal val loadType: LoadType
     internal val viewModelFactory by lazy {
         LightNovelListViewModelFactory(
             provideLightNovelListApi(), loadType
@@ -83,12 +89,14 @@ abstract class LightNovelListFragment : Fragment(), LightNovelAdapter.ItemClickL
         viewDisposables.add(
             viewModel.isLoading
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { isLoading ->
+                .subscribe( { isLoading ->
                     view.light_novel_progress_bar.visibility = when (isLoading) {
                         true -> View.VISIBLE
                         false -> View.GONE
                     }
-                }
+                }, {
+
+                })
         )
 
 
@@ -97,13 +105,10 @@ abstract class LightNovelListFragment : Fragment(), LightNovelAdapter.ItemClickL
 
     override fun onItemClick(lightNovel: LightNovel) {
         val intent = Intent(this.context, LightNovelInfoActivity::class.java).apply {
-            putExtra( LightNovelInfoActivity.KEY_ID, lightNovel.id)
+            putExtra(LightNovelInfoActivity.KEY_ID, lightNovel.id)
+            putExtra(LightNovelInfoActivity.BOOK_TYPE, bookType.ordinal)
         }
         this.context?.startActivity(intent)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 }

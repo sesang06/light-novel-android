@@ -11,5 +11,14 @@ data class LightNovelSeries(
     @SerializedName("aladin_id")
     val aladinId: Int = 0,
     @SerializedName("light_novels")
-    val lightNovels: List<LightNovel> = listOf()
-)
+    private val lightNovels: List<LightNovel> = listOf(),
+    @SerializedName("comics")
+    private val comics: List<LightNovel> = listOf()
+) {
+    fun getBook(bookType: BookType): List<LightNovel> {
+        when (bookType) {
+            BookType.LIGHTNOVEL -> return lightNovels
+            BookType.COMIC -> return comics
+        }
+    }
+}

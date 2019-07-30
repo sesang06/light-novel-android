@@ -47,6 +47,8 @@
 				android:layout_height="wrap_content"
 				android:padding="15dp"
 				
+				android:background="@color/white"
+				android:id="@+id/info_linear_layout"
 				>
 			
 			

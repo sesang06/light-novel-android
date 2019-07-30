@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.SearchView
 import com.sesang06.lightnovellist.adapter.LightNovelSearchPreviewAdapter
 import com.sesang06.lightnovellist.adapter.LightNovelSearchResultAdapter
+import com.sesang06.lightnovellist.model.BookType
 import com.sesang06.lightnovellist.model.LightNovel
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
 import com.sesang06.lightnovellist.viewmodel.SearchLightNovelViewModel
@@ -51,6 +52,7 @@ class SearchLightNovelActivity : AppCompatActivity() {
                 LightNovelInfoActivity::class.java
             ).apply {
                 putExtra(LightNovelInfoActivity.KEY_ID, lightNovel.id)
+                putExtra(LightNovelInfoActivity.BOOK_TYPE, BookType.LIGHTNOVEL.ordinal)
             }
             this@SearchLightNovelActivity.startActivity(intent)
 

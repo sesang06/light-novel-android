@@ -16,6 +16,7 @@ import com.google.firebase.internal.FirebaseAppHelper.getToken
 import com.google.firebase.iid.InstanceIdResult
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.sesang06.lightnovellist.model.BookType
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.action_new -> view_pager.currentItem = 0
             R.id.action_hot -> view_pager.currentItem = 1
+            R.id.action_comic_new -> view_pager.currentItem = 2
+            R.id.action_comic_hot -> view_pager.currentItem = 3
         }
         app_bar.setExpanded(true,true)
         true
@@ -56,6 +59,8 @@ class MainActivity : AppCompatActivity() {
                 when (position) {
                     0 -> bottom_navigation.selectedItemId = R.id.action_new
                     1 -> bottom_navigation.selectedItemId = R.id.action_hot
+                    2 -> bottom_navigation.selectedItemId = R.id.action_comic_new
+                    3 -> bottom_navigation.selectedItemId = R.id.action_comic_hot
                 }
                 app_bar.setExpanded(true,true)
 
@@ -65,15 +70,30 @@ class MainActivity : AppCompatActivity() {
 
         sendTokenIfNeeded()
 
-        FirebaseMessaging.getInstance().subscribeToTopic("dailyReport")
-            .addOnCompleteListener { task ->
-//                var msg = getString(R.string.msg_subscribed)
-                if (!task.isSuccessful) {
-//                    msg = getString(R.string.msg_subscribe_failed)
+        tokenManager.subscribeTopic()
+
+
+        if (intent.action == Intent.ACTION_VIEW) {
+            intent.data.getQueryParameter("id")?.let {
+                val id = it.toInt()
+                intent.data.getQueryParameter("bookType").let { bookTypeRawString: String? ->
+                    val bookType: BookType =
+                        when (bookTypeRawString) {
+                            "COMIC" -> BookType.COMIC
+                            else -> BookType.LIGHTNOVEL
+                        }
+
+                    val intent = Intent(this, LightNovelInfoActivity::class.java).apply {
+                        putExtra(LightNovelInfoActivity.KEY_ID, id)
+                        putExtra(LightNovelInfoActivity.BOOK_TYPE, bookType.ordinal)
+                    }
+                    this.startActivity(intent)
+
+
                 }
-//                Log.d(TAG, msg)
-//                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+
             }
+        }
 
     }
 

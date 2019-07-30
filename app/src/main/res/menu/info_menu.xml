@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	  xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item android:id="@+id/info_capture"
+		  app:showAsAction="never"
+		  android:title="화면 캡처하기"
+		  app:iconTint="@color/white"/>
+	<item android:id="@+id/info_kakao_share"
+		  app:showAsAction="never"
+		  android:title="카카오톡으로 공유하기"
+		  app:iconTint="@color/white"/>
+</menu>
