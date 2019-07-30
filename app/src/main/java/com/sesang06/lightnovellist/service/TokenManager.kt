@@ -1,7 +1,9 @@
 package com.sesang06.lightnovellist.service
 
+import com.google.firebase.messaging.FirebaseMessaging
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 class TokenManager {
 
@@ -12,9 +14,13 @@ class TokenManager {
         compositeDisposable.add (
             api
                 .tokenInfo(token)
-                .subscribe { response ->
-                    print(response)
-                }
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+
+                }, {
+
+                })
+
 
 
         )
@@ -22,4 +28,12 @@ class TokenManager {
     }
 
 
+    fun subscribeTopic() {
+
+        FirebaseMessaging.getInstance().subscribeToTopic("dailyReport")
+            .addOnCompleteListener { task ->
+                 if (!task.isSuccessful) {
+                }
+            }
+    }
 }

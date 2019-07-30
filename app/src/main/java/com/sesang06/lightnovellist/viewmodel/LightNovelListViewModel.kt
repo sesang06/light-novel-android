@@ -34,6 +34,8 @@ class LightNovelListViewModel(val api: LightNovelListServiceApi, val loadType: L
             LoadType.HIT -> api.hit(offset)
             LoadType.RECOMMEND -> api.recommend(offset)
             LoadType.NEW -> api.new(offset)
+            LoadType.COMIC_HIT -> api.comic(offset, "hit")
+            LoadType.COMIC_NEW -> api.comic(offset, "new")
         }
     }
 
@@ -52,18 +54,22 @@ class LightNovelListViewModel(val api: LightNovelListServiceApi, val loadType: L
             .withLatestFrom(lightNovels, BiFunction { append: List<LightNovel>, current: List<LightNovel> ->
                 current + append
             })
-            .subscribe { items ->
+            .subscribe ( { items ->
                 lightNovels.onNext(items)
-            }
+            }, {
+
+            })
         )
         compositeDisposable.add(
         request
             .map  { response: DataResponse<LightNovelList> ->
                 response.data.isLastPage
             }
-            .subscribe { value ->
+            .subscribe( { value ->
                 isLastPage.onNext(value)
-            }
+            }, {
+
+            })
         )
         return compositeDisposable
     }
@@ -75,9 +81,12 @@ class LightNovelListViewModel(val api: LightNovelListServiceApi, val loadType: L
             }
             .doOnSubscribe { isLoading.onNext(true) }
             .doOnTerminate { isLoading.onNext(false) }
-            .subscribe { items ->
+            .subscribe( { items ->
                 lightNovels.onNext(items)
-            }
+            }, {
+
+                }
+            )
 
     }
 }

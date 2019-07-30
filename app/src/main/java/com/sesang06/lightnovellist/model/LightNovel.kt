@@ -3,6 +3,10 @@ package com.sesang06.lightnovellist.model
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
+enum class BookType {
+    LIGHTNOVEL, COMIC
+}
+
 data class LightNovel(
     @SerializedName("publisher_id")
     val publisherId: Int = 0,
@@ -50,4 +54,10 @@ data class LightNovel(
     val indexDescription: String = "",
     @SerializedName("series")
     val series: LightNovelSeries
-)
+) {
+
+    val largeThumbnail: String
+    get() {
+        return this.thumbnail.replace("coversum", "cover500")
+    }
+}

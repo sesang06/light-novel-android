@@ -11,14 +11,30 @@
 			android:id="@+id/action_new"
 			android:enabled="true"
 			android:icon="@drawable/ic_new_releases_black_24dp"
-			android:title="신작"
-			app:showAsAction="ifRoom" />
+			android:title="라노벨 신작"
+			/>
 	
 	<item
 			android:id="@+id/action_hot"
 			android:enabled="true"
 			android:icon="@drawable/ic_whatshot_black_24dp"
-			android:title="인기"
-			app:showAsAction="ifRoom" />
-
+			android:title="라노벨 인기"
+			app:showAsAction="always"
+			/>
+	<item
+			android:id="@+id/action_comic_new"
+			android:enabled="true"
+			android:icon="@drawable/ic_new_releases_black_24dp"
+			android:title="만화 신작"
+			app:showAsAction="always"
+			/>
+	
+	<item
+			android:id="@+id/action_comic_hot"
+			android:enabled="true"
+			android:icon="@drawable/ic_whatshot_black_24dp"
+			android:title="만화 인기"
+			app:showAsAction="always"
+			
+			/>
 </menu>
