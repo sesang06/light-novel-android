@@ -1,6 +1,9 @@
 # 라이트노벨 신간 목록 안드로이드 앱
 
-<img src="/screenshot/2.png" width="200">
+
+<img src="/screenshot/1.jpg" width="200"> <img src="/screenshot/2.jpg" width="200"> <img src="/screenshot/3.jpg" width="200"> <img src="/screenshot/4.jpg" width="200"> <img src="/screenshot/5.jpg" width="200">
+- 개발자가 디자이너 없이 앱 소개 스크린샷을 작업했을 때 나오는 기괴한 결과물.
+- 지옥에서 따끈따끈하게 기어나온 듯한 폰트 선택과 컬러 색감이 인상적이다.
 
 ## (충격, 경악) 라이트노벨 신간을 볼 수 있는 안드로이드 앱이 있다? 뿌슝빠슝
 
