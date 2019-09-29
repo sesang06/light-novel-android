@@ -127,7 +127,7 @@ class SearchLightNovelActivity : AppCompatActivity() {
         disposable.add(
             viewModel.previewLightNovels
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { items ->
+                .subscribe( { items ->
                     with(searchPreviewAdapter) {
                         if (items.isEmpty()) {
                             clearItems()
@@ -138,13 +138,13 @@ class SearchLightNovelActivity : AppCompatActivity() {
                         }
                         notifyDataSetChanged()
                     }
-                }
+                }, {})
         )
 
         disposable.add(
             viewModel.lightNovels
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { items ->
+                .subscribe( { items ->
                     with(searchResultAdapter) {
                         if (items.isEmpty()) {
                             clearItems()
@@ -156,18 +156,18 @@ class SearchLightNovelActivity : AppCompatActivity() {
                         }
                         notifyDataSetChanged()
                     }
-                }
+                }, {})
         )
 
         disposable.add(
             viewModel.isLoading
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { isLoading ->
+                .subscribe( { isLoading ->
                     light_novel_progress_bar.visibility = when (isLoading) {
                         true -> View.VISIBLE
                         false -> View.GONE
                     }
-                }
+                }, {})
         )
         setupSearchView()
 

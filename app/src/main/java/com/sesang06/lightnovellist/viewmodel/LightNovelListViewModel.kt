@@ -2,9 +2,9 @@ package com.sesang06.lightnovellist.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import com.sesang06.lightnovellist.adapter.LoadType
-import com.sesang06.lightnovellist.model.DataResponse
+import com.sesang06.lightnovellist.response.DataResponse
 import com.sesang06.lightnovellist.model.LightNovel
-import com.sesang06.lightnovellist.model.LightNovelList
+import com.sesang06.lightnovellist.response.LightNovelListResponse
 import com.sesang06.lightnovellist.service.LightNovelListServiceApi
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -18,7 +18,7 @@ interface LightNovelListViewModelType {
     val isLoading: BehaviorSubject<Boolean>
     val isLastPage: BehaviorSubject<Boolean>
 
-    fun request(lastId: Int): Observable<DataResponse<LightNovelList>>
+    fun request(lastId: Int): Observable<DataResponse<LightNovelListResponse>>
     fun load(): Disposable
     fun loadMore(): Disposable
 }
@@ -29,7 +29,7 @@ class LightNovelListViewModel(val api: LightNovelListServiceApi, val loadType: L
     override val isLastPage: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
     override val isLoading: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
 
-    override fun request(offset: Int): Observable<DataResponse<LightNovelList>> {
+    override fun request(offset: Int): Observable<DataResponse<LightNovelListResponse>> {
         return when (loadType) {
             LoadType.HIT -> api.hit(offset)
             LoadType.RECOMMEND -> api.recommend(offset)
@@ -48,7 +48,7 @@ class LightNovelListViewModel(val api: LightNovelListServiceApi, val loadType: L
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
         request
-            .map { response: DataResponse<LightNovelList> ->
+            .map { response: DataResponse<LightNovelListResponse> ->
                 response.data.list
             }
             .withLatestFrom(lightNovels, BiFunction { append: List<LightNovel>, current: List<LightNovel> ->
@@ -62,7 +62,7 @@ class LightNovelListViewModel(val api: LightNovelListServiceApi, val loadType: L
         )
         compositeDisposable.add(
         request
-            .map  { response: DataResponse<LightNovelList> ->
+            .map  { response: DataResponse<LightNovelListResponse> ->
                 response.data.isLastPage
             }
             .subscribe( { value ->
@@ -76,7 +76,7 @@ class LightNovelListViewModel(val api: LightNovelListServiceApi, val loadType: L
 
     override fun load(): Disposable {
         return request(0)
-            .map { response: DataResponse<LightNovelList> ->
+            .map { response: DataResponse<LightNovelListResponse> ->
                 response.data.list
             }
             .doOnSubscribe { isLoading.onNext(true) }
