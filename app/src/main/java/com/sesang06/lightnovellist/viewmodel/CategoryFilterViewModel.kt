@@ -3,13 +3,18 @@ package com.sesang06.lightnovellist.viewmodel
 import android.arch.lifecycle.ViewModel
 import com.sesang06.lightnovellist.service.LightNovelListServiceApi
 import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 
 interface CategoryFilterViewModelType {
     val categorySelectModelList: BehaviorSubject<List<CategorySelectModel>>
 
-    fun load(categoryList: List<String>)
+    fun load(categoryList: List<CategorySelectModel>)
 
     fun select(position: Int)
+
+    fun submit()
+
+    val finalCategorySelectModelList: PublishSubject<List<CategorySelectModel>>
 
 }
 
@@ -22,13 +27,12 @@ class CategoryFilterViewModel(
     override val categorySelectModelList: BehaviorSubject<List<CategorySelectModel>>
         = BehaviorSubject.create()
 
+    override val finalCategorySelectModelList: PublishSubject<List<CategorySelectModel>>
+        = PublishSubject.create()
 
-    override fun load(categoryList: List<String>) {
-        val categoryModels = categoryList.map { category: String ->
-            CategorySelectModel(category, false)
-        }
+    override fun load(categoryList: List<CategorySelectModel>) {
 
-        categorySelectModelList.onNext(categoryModels)
+        categorySelectModelList.onNext(categoryList)
     }
 
 
@@ -45,4 +49,10 @@ class CategoryFilterViewModel(
     }
 
 
+    override fun submit() {
+        val lastValue = categorySelectModelList.value
+        if (lastValue != null) {
+            finalCategorySelectModelList.onNext(lastValue)
+        }
+    }
 }

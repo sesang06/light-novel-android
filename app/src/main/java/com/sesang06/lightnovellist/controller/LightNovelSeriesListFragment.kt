@@ -1,5 +1,6 @@
 package com.sesang06.lightnovellist.controller
 
+import android.app.Activity.RESULT_OK
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +16,7 @@ import com.sesang06.lightnovellist.R
 import com.sesang06.lightnovellist.adapter.LightNovelSeriesMainAdapter
 import com.sesang06.lightnovellist.rx.AutoClearedDisposable
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
+import com.sesang06.lightnovellist.viewmodel.CategorySelectModel
 import com.sesang06.lightnovellist.viewmodel.LightNovelSeriesListViewModel
 import com.sesang06.lightnovellist.viewmodel.LightNovelSeriesListViewModelFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,15 +26,21 @@ import kotlinx.android.synthetic.main.fragment_light_novel_series_list.view.*
 class LightNovelSeriesListFragment : Fragment() {
 
 
+    companion object {
+        const val SERIES_SELECT = 1000;
+    }
+
+
     internal val adapter by lazy {
         LightNovelSeriesMainAdapter().apply {
-            //            setItemClickListener(this@LightNovelSeriesListFragment)
         }
     }
 
     internal val disposeables = AutoClearedDisposable(this)
 
     private lateinit var scrollListener: RecyclerView.OnScrollListener
+
+    private var categories: ArrayList<CategorySelectModel> = ArrayList()
 
     internal val viewDisposables = AutoClearedDisposable(this, false)
     internal val viewModelFactory by lazy {
@@ -97,11 +105,56 @@ class LightNovelSeriesListFragment : Fragment() {
                 })
         )
 
-        val intent = Intent(this.context, CategoryFilterActivity::class.java)
-        this.context?.startActivity(intent)
+        viewDisposables.add(
+            viewModel.categories
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ categories ->
+                    this.categories = ArrayList(categories)
+
+                   }, {
+
+                })
+        )
+
+        viewDisposables.add(
+            viewModel.categoriesText
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ text ->
+                    view.light_novel_category_text_view.text = text
+                }, {
+
+                })
+        )
+
+        view.light_novel_series_list_select_button.setOnClickListener {
+            val intent = Intent(this.context, CategoryFilterActivity::class.java).apply {
+                putParcelableArrayListExtra(
+                    CategoryFilterActivity.CATEGORY_LIST,
+                    this@LightNovelSeriesListFragment.categories
+                )
+            }
+            this.startActivityForResult(intent, SERIES_SELECT)
+
+        }
+
 
         return view
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode != RESULT_OK) {
+            return
+        }
+
+        val categories = data?.getParcelableArrayListExtra<CategorySelectModel>(CategoryFilterActivity.CATEGORY_LIST)
+
+        if (categories != null) {
+            viewDisposables.add(viewModel.filter(categories))
+        }
+    }
+
 
 //    override fun onItemClick(lightNovel: LightNovel) {
 //        val intent = Intent(this.context, LightNovelInfoActivity::class.java).apply {

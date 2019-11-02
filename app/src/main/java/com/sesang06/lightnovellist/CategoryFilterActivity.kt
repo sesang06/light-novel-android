@@ -1,6 +1,8 @@
 package com.sesang06.lightnovellist
 
+import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -8,6 +10,7 @@ import com.sesang06.lightnovellist.adapter.CategoryFilterAdapter
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
 import com.sesang06.lightnovellist.viewmodel.CategoryFilterViewModel
 import com.sesang06.lightnovellist.viewmodel.CategoryFilterViewModelFactory
+import com.sesang06.lightnovellist.viewmodel.CategorySelectModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_category_filter.*
@@ -16,6 +19,10 @@ import kotlinx.android.synthetic.main.fragment_light_novel.view.*
 
 class CategoryFilterActivity : AppCompatActivity(), CategoryFilterAdapter.ItemClickListener {
 
+
+    companion object {
+        const val CATEGORY_LIST = "category_list"
+    }
     private val compositeDisposable = CompositeDisposable()
 
     lateinit var viewModel: CategoryFilterViewModel
@@ -49,6 +56,8 @@ class CategoryFilterActivity : AppCompatActivity(), CategoryFilterAdapter.ItemCl
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val categoryList = intent.extras.getParcelableArrayList<CategorySelectModel>(CATEGORY_LIST)
+
         viewModel = ViewModelProviders.of(
             this@CategoryFilterActivity,
             viewModelFactory
@@ -58,12 +67,14 @@ class CategoryFilterActivity : AppCompatActivity(), CategoryFilterAdapter.ItemCl
         category_filter_recycler_view.layoutManager = categoryLayoutManager
 
 
-        viewModel.load(listOf("A", "B", "C"))
+        categoryList?.toList()?.let {
+            viewModel.load(it)
+        }
 
         compositeDisposable.add(
             viewModel.categorySelectModelList
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { items ->
+                .subscribe( { items ->
                     with(adapter) {
                         if (items.isEmpty()) {
                             clearItems()
@@ -72,8 +83,25 @@ class CategoryFilterActivity : AppCompatActivity(), CategoryFilterAdapter.ItemCl
                         }
                         notifyDataSetChanged()
                     }
-                }
+                }, {})
         )
+
+        category_filter_submit_button.setOnClickListener {
+            viewModel.submit()
+        }
+
+        compositeDisposable.add(
+            viewModel.finalCategorySelectModelList
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( { items ->
+                    val intent = Intent()
+                    val arrayList = ArrayList(items)
+                    intent.putParcelableArrayListExtra(CATEGORY_LIST, arrayList)
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                }, {})
+        )
+
 
     }
 
