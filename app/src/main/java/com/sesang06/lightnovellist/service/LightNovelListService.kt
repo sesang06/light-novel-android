@@ -52,7 +52,7 @@ interface LightNovelListServiceApi {
     ): Observable<DataResponse<LightNovelSeriesListResponse>>
 
     @GET("light_novel_series/{id}")
-    fun lightNovelSeries(): Observable<DataResponse<LightNovelSeriesResponse>>
+    fun lightNovelSeries(@Path("id") id: Int): Observable<DataResponse<LightNovelSeriesResponse>>
 
     @GET("category")
     fun categoryList(): Observable<DataResponse<CategoryListResponse>>

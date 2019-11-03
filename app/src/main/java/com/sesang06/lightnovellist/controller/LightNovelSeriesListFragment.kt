@@ -13,7 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.sesang06.lightnovellist.CategoryFilterActivity
 import com.sesang06.lightnovellist.R
+import com.sesang06.lightnovellist.SeriesInfoActivity
+import com.sesang06.lightnovellist.adapter.LightNovelSeriesAdapter
 import com.sesang06.lightnovellist.adapter.LightNovelSeriesMainAdapter
+import com.sesang06.lightnovellist.model.LightNovelSeries
 import com.sesang06.lightnovellist.rx.AutoClearedDisposable
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
 import com.sesang06.lightnovellist.viewmodel.CategorySelectModel
@@ -23,7 +26,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_light_novel.view.*
 import kotlinx.android.synthetic.main.fragment_light_novel_series_list.view.*
 
-class LightNovelSeriesListFragment : Fragment() {
+class LightNovelSeriesListFragment : Fragment(), LightNovelSeriesMainAdapter.ItemClickListener {
 
 
     companion object {
@@ -33,6 +36,7 @@ class LightNovelSeriesListFragment : Fragment() {
 
     internal val adapter by lazy {
         LightNovelSeriesMainAdapter().apply {
+            setItemClickListener(this@LightNovelSeriesListFragment)
         }
     }
 
@@ -148,6 +152,9 @@ class LightNovelSeriesListFragment : Fragment() {
             return
         }
 
+        if (requestCode != SERIES_SELECT) {
+            return
+        }
         val categories = data?.getParcelableArrayListExtra<CategorySelectModel>(CategoryFilterActivity.CATEGORY_LIST)
 
         if (categories != null) {
@@ -156,12 +163,12 @@ class LightNovelSeriesListFragment : Fragment() {
     }
 
 
-//    override fun onItemClick(lightNovel: LightNovel) {
-//        val intent = Intent(this.context, LightNovelInfoActivity::class.java).apply {
-//            putExtra(LightNovelInfoActivity.KEY_ID, lightNovel.id)
-//            putExtra(LightNovelInfoActivity.BOOK_TYPE, bookType.ordinal)
-//        }
-//        this.context?.startActivity(intent)
-//    }
+
+    override fun onItemClick(lightNovelSeries: LightNovelSeries) {
+        var intent = Intent(this.context, SeriesInfoActivity::class.java).apply {
+            putExtra(SeriesInfoActivity.KEY_ID, lightNovelSeries.id)
+        }
+        this.startActivity(intent)
+    }
 
 }

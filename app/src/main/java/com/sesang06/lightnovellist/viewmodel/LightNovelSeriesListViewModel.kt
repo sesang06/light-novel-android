@@ -59,7 +59,7 @@ class LightNovelSeriesListViewModel(
 
             }
             return text.map {
-                "카테고리 : $text"
+                "카테고리 : $it"
             }
 
         }

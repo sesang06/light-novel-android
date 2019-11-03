@@ -29,10 +29,11 @@ class MainActivity : AppCompatActivity() {
 
     private var navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.action_new -> view_pager.currentItem = 0
-            R.id.action_hot -> view_pager.currentItem = 1
-            R.id.action_comic_new -> view_pager.currentItem = 2
-            R.id.action_comic_hot -> view_pager.currentItem = 3
+            R.id.action_home -> view_pager.currentItem = 0
+            R.id.action_new -> view_pager.currentItem = 1
+            R.id.action_hot -> view_pager.currentItem = 2
+            R.id.action_comic_new -> view_pager.currentItem = 3
+            R.id.action_comic_hot -> view_pager.currentItem = 4
         }
         app_bar.setExpanded(true,true)
         true
