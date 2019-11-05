@@ -1,7 +1,10 @@
 package com.sesang06.lightnovellist.viewmodel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.sesang06.lightnovellist.model.*
+import com.sesang06.lightnovellist.response.ComicResponse
+import com.sesang06.lightnovellist.response.DataResponse
+import com.sesang06.lightnovellist.response.LightNovelResponse
 import com.sesang06.lightnovellist.service.LightNovelListServiceApi
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject

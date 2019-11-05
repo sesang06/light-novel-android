@@ -2,9 +2,9 @@ package com.sesang06.lightnovellist
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.iid.FirebaseInstanceId
@@ -29,10 +29,11 @@ class MainActivity : AppCompatActivity() {
 
     private var navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.action_new -> view_pager.currentItem = 0
-            R.id.action_hot -> view_pager.currentItem = 1
-            R.id.action_comic_new -> view_pager.currentItem = 2
-            R.id.action_comic_hot -> view_pager.currentItem = 3
+            R.id.action_home -> view_pager.currentItem = 0
+            R.id.action_new -> view_pager.currentItem = 1
+            R.id.action_hot -> view_pager.currentItem = 2
+            R.id.action_comic_new -> view_pager.currentItem = 3
+            R.id.action_comic_hot -> view_pager.currentItem = 4
         }
         app_bar.setExpanded(true,true)
         true
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         pagerAdapter = MainPagerAdapter(supportFragmentManager)
         view_pager.adapter = pagerAdapter
         bottom_navigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
-        view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        view_pager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -57,10 +58,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) {
                 when (position) {
-                    0 -> bottom_navigation.selectedItemId = R.id.action_new
-                    1 -> bottom_navigation.selectedItemId = R.id.action_hot
-                    2 -> bottom_navigation.selectedItemId = R.id.action_comic_new
-                    3 -> bottom_navigation.selectedItemId = R.id.action_comic_hot
+                    0 -> bottom_navigation.selectedItemId = R.id.action_home
+                    1 -> bottom_navigation.selectedItemId = R.id.action_new
+                    2 -> bottom_navigation.selectedItemId = R.id.action_hot
+                    3 -> bottom_navigation.selectedItemId = R.id.action_comic_new
+                    4 -> bottom_navigation.selectedItemId = R.id.action_comic_hot
                 }
                 app_bar.setExpanded(true,true)
 

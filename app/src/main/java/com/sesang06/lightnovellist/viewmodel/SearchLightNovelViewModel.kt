@@ -1,10 +1,9 @@
 package com.sesang06.lightnovellist.viewmodel
 
-import android.arch.lifecycle.ViewModel
-import com.sesang06.lightnovellist.adapter.LoadType
-import com.sesang06.lightnovellist.model.DataResponse
+import androidx.lifecycle.ViewModel
+import com.sesang06.lightnovellist.response.DataResponse
 import com.sesang06.lightnovellist.model.LightNovel
-import com.sesang06.lightnovellist.model.LightNovelList
+import com.sesang06.lightnovellist.response.LightNovelListResponse
 import com.sesang06.lightnovellist.service.LightNovelListServiceApi
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -39,7 +38,7 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
                 .flatMap { query ->
                     api.search(query, 0)
                 }
-                .map { response: DataResponse<LightNovelList> ->
+                .map { response: DataResponse<LightNovelListResponse> ->
                     response.data.list
                 }
                 .doOnNext { isLoading.onNext(false) }
@@ -69,7 +68,7 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
                 .share()
             compositeDisposable.add(
                 request
-                    .map { response: DataResponse<LightNovelList> ->
+                    .map { response: DataResponse<LightNovelListResponse> ->
                         response.data.list
                     }
                     .subscribe( { items ->
@@ -80,7 +79,7 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
             )
             compositeDisposable.add(
                 request
-                    .map { response: DataResponse<LightNovelList> ->
+                    .map { response: DataResponse<LightNovelListResponse> ->
                         response.data.isLastPage
                     }
                     .subscribe( { value ->
@@ -103,7 +102,7 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
             request
-                .map { response: DataResponse<LightNovelList> ->
+                .map { response: DataResponse<LightNovelListResponse> ->
                     response.data.list
                 }
                 .withLatestFrom(lightNovels, BiFunction { append: List<LightNovel>, current: List<LightNovel> ->
@@ -117,7 +116,7 @@ class SearchLightNovelViewModel(val api: LightNovelListServiceApi) : ViewModel()
         )
         compositeDisposable.add(
             request
-                .map { response: DataResponse<LightNovelList> ->
+                .map { response: DataResponse<LightNovelListResponse> ->
                     response.data.isLastPage
                 }
                 .subscribe( { value ->

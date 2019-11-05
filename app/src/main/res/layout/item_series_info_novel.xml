@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+	
+	<androidx.cardview.widget.CardView
+			android:id="@+id/thumbnail_card_view"
+			
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			
+			app:cardCornerRadius="4dp"
+			app:cardMaxElevation="2dp"
+			app:cardElevation="2dp"
+			app:cardPreventCornerOverlap="true"
+			app:cardUseCompatPadding="true"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			
+			app:layout_constraintDimensionRatio="H,1:1.4"
+			>
+		<ImageView
+				android:id="@+id/thumbnail_image_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="centerCrop"
+				/>
+	</androidx.cardview.widget.CardView>
+	
+	<TextView
+			android:id="@+id/title_text_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			
+			android:paddingTop="2dp"
+			android:paddingBottom="2dp"
+			android:paddingLeft="4dp"
+			android:paddingRight="4dp"
+			
+			android:textSize="12sp"
+			android:fontFamily="sans-serif"
+			android:textColor="@color/text_high_emphasis"
+			
+			android:ellipsize="end"
+			android:maxLines="2"
+			
+			app:layout_constraintTop_toBottomOf="@+id/thumbnail_card_view"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			
+			
+			/>
+</androidx.constraintlayout.widget.ConstraintLayout>

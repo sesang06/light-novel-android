@@ -1,9 +1,9 @@
 package com.sesang06.lightnovellist
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.google.gson.Gson
@@ -20,7 +20,7 @@ class LightNovelRecommendInfoActivity: AppCompatActivity() {
     }
 
     internal val recommendInfoLayoutManager by lazy {
-        GridLayoutManager(this,3)
+        androidx.recyclerview.widget.GridLayoutManager(this, 3)
     }
 
     internal val recommendInfoClickListener = object : LightNovelRecommendInfoAdapter.ItemClickListener {

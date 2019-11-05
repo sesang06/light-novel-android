@@ -1,12 +1,12 @@
 package com.sesang06.lightnovellist
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.transition.Visibility
 import android.view.View
 import android.widget.SearchView
@@ -42,7 +42,7 @@ class SearchLightNovelActivity : AppCompatActivity() {
     }
 
     private val searchResultLayoutManager by lazy {
-        LinearLayoutManager(this)
+        androidx.recyclerview.widget.LinearLayoutManager(this)
     }
 
     private val searchResultClickListener = object : LightNovelSearchResultAdapter.ItemClickListener {
@@ -67,7 +67,7 @@ class SearchLightNovelActivity : AppCompatActivity() {
 
 
     internal val searchPreviewLayoutManager by lazy {
-        LinearLayoutManager(this)
+        androidx.recyclerview.widget.LinearLayoutManager(this)
     }
 
     internal val searchPreviewClickListener = object : LightNovelSearchPreviewAdapter.ItemClickListener {
@@ -94,7 +94,7 @@ class SearchLightNovelActivity : AppCompatActivity() {
 
 
     private val disposable = CompositeDisposable()
-    private lateinit var scrollListener: RecyclerView.OnScrollListener
+    private lateinit var scrollListener: androidx.recyclerview.widget.RecyclerView.OnScrollListener
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,8 +111,8 @@ class SearchLightNovelActivity : AppCompatActivity() {
         search_result_recycler_view.adapter = searchResultAdapter
 
 
-        scrollListener = object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        scrollListener = object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 val totalItemCount = searchResultLayoutManager.itemCount
                 if (totalItemCount == searchResultLayoutManager.findLastVisibleItemPosition() + 1) {
@@ -127,7 +127,7 @@ class SearchLightNovelActivity : AppCompatActivity() {
         disposable.add(
             viewModel.previewLightNovels
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { items ->
+                .subscribe( { items ->
                     with(searchPreviewAdapter) {
                         if (items.isEmpty()) {
                             clearItems()
@@ -138,13 +138,13 @@ class SearchLightNovelActivity : AppCompatActivity() {
                         }
                         notifyDataSetChanged()
                     }
-                }
+                }, {})
         )
 
         disposable.add(
             viewModel.lightNovels
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { items ->
+                .subscribe( { items ->
                     with(searchResultAdapter) {
                         if (items.isEmpty()) {
                             clearItems()
@@ -156,18 +156,18 @@ class SearchLightNovelActivity : AppCompatActivity() {
                         }
                         notifyDataSetChanged()
                     }
-                }
+                }, {})
         )
 
         disposable.add(
             viewModel.isLoading
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { isLoading ->
+                .subscribe( { isLoading ->
                     light_novel_progress_bar.visibility = when (isLoading) {
                         true -> View.VISIBLE
                         false -> View.GONE
                     }
-                }
+                }, {})
         )
         setupSearchView()
 

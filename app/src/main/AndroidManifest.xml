@@ -63,7 +63,11 @@
 				  android:theme="@style/NoActionBarAppTheme"/>
 		<activity android:name=".LightNovelRecommendInfoActivity"
 				  android:theme="@style/NoActionBarAppTheme"/>
+		<activity android:name=".CategoryFilterActivity"
+				  android:theme="@style/NoActionBarAppTheme"/>
+		<activity android:name=".SeriesInfoActivity" android:theme="@style/NoActionBarAppTheme">
 		
+		</activity>
 		<meta-data
 				android:name="com.kakao.sdk.AppKey"
 				android:value="@string/kakao_app_key" />

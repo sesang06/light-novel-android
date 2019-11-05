@@ -18,7 +18,7 @@ class UserAgentIntercepter() : Interceptor {
         proceed(newRequest)
     }
 
-    private val product = "LightNovelList"
+    private val product = "LightNovelListResponse"
     private val type = "Android"
     private val version: String
     get() {
