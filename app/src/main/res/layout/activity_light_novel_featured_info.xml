@@ -1,4 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
 		
 		android:id="@+id/coordinator_layout"
 		
@@ -8,11 +8,11 @@
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto">
 	
-	<android.support.design.widget.AppBarLayout
+	<com.google.android.material.appbar.AppBarLayout
 			android:id="@+id/app_bar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content">
-		<android.support.design.widget.CollapsingToolbarLayout
+		<com.google.android.material.appbar.CollapsingToolbarLayout
 				android:id="@+id/htab_collapse_toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
@@ -71,7 +71,7 @@
 						android:text="세상에 지친 당신에게 선물하고 싶은 이야기\n작년 여름, 네이버 웹툰을 통해 소개된 열 편의 짧은 이야기. 눈이 부시게 아름다운 이 만화를 일 년이 지나 한 권의 책으로 간직할 수 있게 되었다. 여름의 정취를 물씬 풍기는 아름다운 색채와 그보다 더 아름다운 이야기가 주는 여운이, 책을 덮고 나서도 오랫동안 마음속을 떠다닌다. "
 			/>
 			</LinearLayout>
-			<android.support.v7.widget.Toolbar
+			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="?attr/actionBarSize"
@@ -81,15 +81,15 @@
 				app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 				app:layout_collapseMode="pin"
 				/>
-		</android.support.design.widget.CollapsingToolbarLayout>
-	</android.support.design.widget.AppBarLayout>
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 	
 	
-	<android.support.v7.widget.RecyclerView
+	<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/featured_info_recycler_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			app:layout_behavior="@string/appbar_scrolling_view_behavior">
 	
-	</android.support.v7.widget.RecyclerView>
-</android.support.design.widget.CoordinatorLayout>
+	</androidx.recyclerview.widget.RecyclerView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

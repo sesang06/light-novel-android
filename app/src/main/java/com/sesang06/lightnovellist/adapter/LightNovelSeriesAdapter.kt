@@ -1,6 +1,6 @@
 package com.sesang06.lightnovellist.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.sesang06.lightnovellist.R
@@ -8,7 +8,7 @@ import com.sesang06.lightnovellist.adapter.viewholder.LightNovelSearchResultView
 import com.sesang06.lightnovellist.adapter.viewholder.LightNovelSeriesViewHolder
 import com.sesang06.lightnovellist.model.LightNovel
 
-class LightNovelSeriesAdapter : RecyclerView.Adapter<LightNovelSeriesViewHolder>() {
+class LightNovelSeriesAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<LightNovelSeriesViewHolder>() {
 
     private var items: MutableList<LightNovel> = mutableListOf()
 

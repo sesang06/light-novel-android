@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
 		
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		
@@ -9,7 +9,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 	
-	<android.support.design.widget.AppBarLayout
+	<com.google.android.material.appbar.AppBarLayout
 			android:id="@+id/app_bar"
 			
 			android:layout_width="match_parent"
@@ -17,7 +17,7 @@
 			
 			android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 		
-		<android.support.v7.widget.Toolbar
+		<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				
 				android:layout_width="match_parent"
@@ -32,43 +32,66 @@
 				
 				app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 	
-	</android.support.design.widget.AppBarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 	
-	<android.support.v4.widget.NestedScrollView
+	<androidx.core.widget.NestedScrollView
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			app:layout_behavior="@string/appbar_scrolling_view_behavior"
 			>
 		
-		<android.support.constraint.ConstraintLayout
+		<androidx.constraintlayout.widget.ConstraintLayout
 				android:layout_width="match_parent"
 				android:layout_height="match_parent">
 			<TextView
 					android:id="@+id/series_title_view"
 					android:layout_width="match_parent"
-					android:layout_height="30dp"
+					android:layout_height="wrap_content"
+					
+					android:textSize="20sp"
+					android:fontFamily="sans-serif-medium"
+					android:textColor="@color/text_high_emphasis"
+					
+					
+					android:layout_marginTop="20dp"
+					android:layout_marginRight="20dp"
+					android:layout_marginLeft="20dp"
+					android:layout_marginBottom="10dp"
 					
 					app:layout_constraintTop_toTopOf="parent"
 					app:layout_constraintBottom_toTopOf="@+id/series_description_view"
 					app:layout_constraintLeft_toLeftOf="parent"
 					app:layout_constraintRight_toRightOf="parent"
+					
 					/>
 			<TextView
 					android:id="@+id/series_description_view"
 					android:layout_width="match_parent"
-					android:layout_height="30dp"
+					android:layout_height="wrap_content"
 					
+					android:textSize="15sp"
+					android:fontFamily="sans-serif-medium"
+					android:textColor="@color/text_high_emphasis"
+					
+					android:layout_marginTop="10dp"
+					android:layout_marginRight="20dp"
+					android:layout_marginLeft="20dp"
+					android:layout_marginBottom="20dp"
 					app:layout_constraintTop_toBottomOf="@+id/series_title_view"
 					app:layout_constraintBottom_toTopOf="@+id/novel_info_recycler_view"
 					app:layout_constraintLeft_toLeftOf="parent"
 					app:layout_constraintRight_toRightOf="parent"
+					
 					/>
 			
 			
-			<android.support.v7.widget.RecyclerView
+			<androidx.recyclerview.widget.RecyclerView
 					android:id="@+id/novel_info_recycler_view"
 					android:layout_height="match_parent"
 					android:layout_width="match_parent"
+					
+					android:paddingLeft="20dp"
+					android:paddingRight="20dp"
 					
 					app:layout_constraintTop_toBottomOf="@+id/series_description_view"
 					app:layout_constraintBottom_toBottomOf="parent"
@@ -77,10 +100,10 @@
 					
 					
 					/>
-		</android.support.constraint.ConstraintLayout>
-	</android.support.v4.widget.NestedScrollView>
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.core.widget.NestedScrollView>
 
 
 
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

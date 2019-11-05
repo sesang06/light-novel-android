@@ -1,13 +1,13 @@
 package com.sesang06.lightnovellist.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.sesang06.lightnovellist.R
 import com.sesang06.lightnovellist.adapter.viewholder.LightNovelViewHolder
 import com.sesang06.lightnovellist.model.LightNovel
 
-class LightNovelAdapter : RecyclerView.Adapter<LightNovelViewHolder>() {
+class LightNovelAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<LightNovelViewHolder>() {
 
     private var items: MutableList<LightNovel> = mutableListOf()
 

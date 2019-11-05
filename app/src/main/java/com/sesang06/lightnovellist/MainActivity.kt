@@ -2,9 +2,9 @@ package com.sesang06.lightnovellist
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.iid.FirebaseInstanceId
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         pagerAdapter = MainPagerAdapter(supportFragmentManager)
         view_pager.adapter = pagerAdapter
         bottom_navigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
-        view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        view_pager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
             }

@@ -1,12 +1,12 @@
 package com.sesang06.lightnovellist
 
 import android.Manifest
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -54,7 +54,7 @@ class SeriesInfoActivity: AppCompatActivity(), SeriesInfoNovelAdapter.ItemClickL
     }
 
     private val seriesLayoutManager by lazy {
-        GridLayoutManager(this, 4)
+        androidx.recyclerview.widget.GridLayoutManager(this, 4)
     }
 
 

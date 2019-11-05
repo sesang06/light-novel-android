@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 	
-	<android.support.constraint.ConstraintLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
 			android:id="@+id/light_novel_series_list_select_layout"
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
@@ -28,28 +28,34 @@
 				app:layout_constraintTop_toTopOf="parent"
 				app:layout_constraintBottom_toBottomOf="parent"
 				
-				android:textSize="20sp"
+				android:textSize="15sp"
 				android:fontFamily="sans-serif-medium"
 				android:textColor="@color/text_high_emphasis"
 				android:ellipsize="end"
 				android:maxLines="1"
 				
 				/>
-		<Button
+		<com.google.android.material.button.MaterialButton
 				android:id="@+id/light_novel_series_list_select_button"
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
-				android:text="카테고리 변경"
+				style="@style/Widget.MaterialComponents.Button"
 				
+				android:text="변경"
+				
+				android:textSize="15sp"
+				android:fontFamily="sans-serif-medium"
 				android:layout_marginRight="10dp"
+				android:layout_marginBottom="2dp"
+				android:layout_marginTop="2dp"
 				app:layout_constraintLeft_toRightOf="@+id/light_novel_category_text_view"
 				app:layout_constraintRight_toRightOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
 				app:layout_constraintBottom_toBottomOf="parent"
 				/>
-	</android.support.constraint.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 	
-	<android.support.v7.widget.RecyclerView
+	<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/light_novel_series_list_recycler_view"
 			android:layout_height="0dp"
 			android:layout_width="0dp"
@@ -68,4 +74,4 @@
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintBottom_toBottomOf="parent"
 			/>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

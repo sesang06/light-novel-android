@@ -1,12 +1,12 @@
 package com.sesang06.lightnovellist
 
 import android.app.Activity
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import com.sesang06.lightnovellist.adapter.CategoryFilterAdapter
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
@@ -30,7 +30,7 @@ class CategoryFilterActivity : AppCompatActivity(), CategoryFilterAdapter.ItemCl
     lateinit var viewModel: CategoryFilterViewModel
 
     private val categoryLayoutManager by lazy {
-        GridLayoutManager(this, 4)
+        androidx.recyclerview.widget.GridLayoutManager(this, 4)
     }
 
 

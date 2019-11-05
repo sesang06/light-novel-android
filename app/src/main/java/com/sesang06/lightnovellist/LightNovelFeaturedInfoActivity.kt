@@ -1,9 +1,9 @@
 package com.sesang06.lightnovellist
 
 import android.os.Bundle
-import android.support.design.widget.CollapsingToolbarLayout
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.google.gson.Gson
@@ -12,7 +12,7 @@ import com.sesang06.lightnovellist.model.LightNovel
 import kotlinx.android.synthetic.main.activity_light_novel_featured_info.*
 import kotlinx.android.synthetic.main.activity_light_novel_featured_info.toolbar
 import android.opengl.ETC1.getHeight
-import android.support.design.widget.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_light_novel_featured_info.app_bar
 import kotlinx.android.synthetic.main.activity_light_novel_info.*
@@ -25,7 +25,8 @@ class LightNovelFeaturedInfoActivity: AppCompatActivity() {
     }
 
     internal val featuredInfoLayoutManager by lazy {
-        LinearLayoutManager(this).apply { orientation = LinearLayoutManager.VERTICAL }
+        androidx.recyclerview.widget.LinearLayoutManager(this)
+            .apply { orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL }
     }
 
     internal val featuredInfoClickListener = object : LightNovelFeaturedInfoAdapter.ItemClickListener {

@@ -1,6 +1,6 @@
 package com.sesang06.lightnovellist.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.sesang06.lightnovellist.R
@@ -9,7 +9,7 @@ import com.sesang06.lightnovellist.adapter.viewholder.LightNovelRecommendViewHol
 import com.sesang06.lightnovellist.adapter.viewholder.LightNovelViewHolder
 import com.sesang06.lightnovellist.model.LightNovel
 
-class LightNovelRecommendInfoAdapter : RecyclerView.Adapter<LightNovelRecommendInfoViewHolder>() {
+class LightNovelRecommendInfoAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<LightNovelRecommendInfoViewHolder>() {
 
     private var items: MutableList<LightNovel> = mutableListOf()
 

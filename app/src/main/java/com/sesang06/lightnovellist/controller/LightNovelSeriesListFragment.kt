@@ -1,13 +1,13 @@
 package com.sesang06.lightnovellist.controller
 
 import android.app.Activity.RESULT_OK
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +26,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_light_novel.view.*
 import kotlinx.android.synthetic.main.fragment_light_novel_series_list.view.*
 
-class LightNovelSeriesListFragment : Fragment(), LightNovelSeriesMainAdapter.ItemClickListener {
+class LightNovelSeriesListFragment : androidx.fragment.app.Fragment(), LightNovelSeriesMainAdapter.ItemClickListener {
 
 
     companion object {
@@ -42,7 +42,7 @@ class LightNovelSeriesListFragment : Fragment(), LightNovelSeriesMainAdapter.Ite
 
     internal val disposeables = AutoClearedDisposable(this)
 
-    private lateinit var scrollListener: RecyclerView.OnScrollListener
+    private lateinit var scrollListener: androidx.recyclerview.widget.RecyclerView.OnScrollListener
 
     private var categories: ArrayList<CategorySelectModel> = ArrayList()
 
@@ -53,7 +53,7 @@ class LightNovelSeriesListFragment : Fragment(), LightNovelSeriesMainAdapter.Ite
         )
     }
     internal val layoutManager by lazy {
-        GridLayoutManager(this.context, 3)
+        androidx.recyclerview.widget.GridLayoutManager(this.context, 3)
     }
     lateinit var viewModel: LightNovelSeriesListViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -65,8 +65,8 @@ class LightNovelSeriesListFragment : Fragment(), LightNovelSeriesMainAdapter.Ite
         viewModel = ViewModelProviders.of(this, viewModelFactory)[LightNovelSeriesListViewModel::class.java]
 
 
-        scrollListener = object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        scrollListener = object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 val totalItemCount = layoutManager.itemCount
                 if (totalItemCount == layoutManager.findLastVisibleItemPosition() + 1) {

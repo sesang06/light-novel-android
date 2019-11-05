@@ -1,6 +1,6 @@
 package com.sesang06.lightnovellist.viewmodel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.sesang06.lightnovellist.adapter.LoadType
 import com.sesang06.lightnovellist.model.LightNovel
 import com.sesang06.lightnovellist.model.LightNovelSeries

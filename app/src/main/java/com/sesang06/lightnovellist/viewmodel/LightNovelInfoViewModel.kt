@@ -1,6 +1,6 @@
 package com.sesang06.lightnovellist.viewmodel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.sesang06.lightnovellist.model.*
 import com.sesang06.lightnovellist.response.ComicResponse
 import com.sesang06.lightnovellist.response.DataResponse

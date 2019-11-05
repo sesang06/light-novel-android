@@ -1,11 +1,11 @@
 package com.sesang06.lightnovellist.controller
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +22,7 @@ import com.sesang06.lightnovellist.viewmodel.LightNovelListViewModelFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_light_novel.view.*
 
-abstract class LightNovelListFragment : Fragment(), LightNovelAdapter.ItemClickListener {
+abstract class LightNovelListFragment : androidx.fragment.app.Fragment(), LightNovelAdapter.ItemClickListener {
 
     abstract internal val loadType: LoadType
 
@@ -34,7 +34,7 @@ abstract class LightNovelListFragment : Fragment(), LightNovelAdapter.ItemClickL
 
     internal val disposeables = AutoClearedDisposable(this)
 
-    private lateinit var scrollListener: RecyclerView.OnScrollListener
+    private lateinit var scrollListener: androidx.recyclerview.widget.RecyclerView.OnScrollListener
 
     internal val viewDisposables = AutoClearedDisposable(this, false)
     internal val viewModelFactory by lazy {
@@ -43,7 +43,7 @@ abstract class LightNovelListFragment : Fragment(), LightNovelAdapter.ItemClickL
         )
     }
     internal val layoutManager by lazy {
-        LinearLayoutManager(this.context)
+        androidx.recyclerview.widget.LinearLayoutManager(this.context)
     }
     lateinit var viewModel: LightNovelListViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,8 +55,8 @@ abstract class LightNovelListFragment : Fragment(), LightNovelAdapter.ItemClickL
         viewModel = ViewModelProviders.of(this, viewModelFactory)[LightNovelListViewModel::class.java]
 
 
-        scrollListener = object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        scrollListener = object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 val totalItemCount = layoutManager.itemCount
                 if (totalItemCount == layoutManager.findLastVisibleItemPosition() + 1) {

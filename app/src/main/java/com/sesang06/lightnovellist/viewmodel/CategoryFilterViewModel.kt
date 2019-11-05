@@ -1,6 +1,6 @@
 package com.sesang06.lightnovellist.viewmodel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.sesang06.lightnovellist.service.LightNovelListServiceApi
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject

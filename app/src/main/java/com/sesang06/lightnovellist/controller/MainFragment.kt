@@ -2,9 +2,9 @@ package com.sesang06.lightnovellist.controller
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,14 +26,15 @@ import kotlinx.android.synthetic.main.fragment_main.view.*
 
 
 
-class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, LightNovelRecommendAdapter.ItemClickListener {
+class MainFragment: androidx.fragment.app.Fragment(), LightNovelFeaturedAdapter.ItemClickListener, LightNovelRecommendAdapter.ItemClickListener {
 
     internal val featuredAdapter by lazy {
         LightNovelFeaturedAdapter().apply { setItemClickListener(featuredClickListener) }
     }
 
     internal val featuredLayoutManager by lazy {
-        LinearLayoutManager(this.context).apply { orientation = LinearLayoutManager.HORIZONTAL }
+        androidx.recyclerview.widget.LinearLayoutManager(this.context)
+            .apply { orientation = androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL }
 
 //        object : LinearLayoutManager(this.context) {
 //            override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
@@ -56,7 +57,8 @@ class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, Lig
     }
 
     internal val recommentLayoutManager by lazy {
-        LinearLayoutManager(this.context).apply { orientation = LinearLayoutManager.HORIZONTAL }
+        androidx.recyclerview.widget.LinearLayoutManager(this.context)
+            .apply { orientation = androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL }
     }
 
     internal val hitAdapter by lazy {
@@ -64,7 +66,8 @@ class MainFragment: Fragment(), LightNovelFeaturedAdapter.ItemClickListener, Lig
     }
 
     internal val hitLayoutManager by lazy {
-        LinearLayoutManager(this.context).apply { orientation = LinearLayoutManager.HORIZONTAL }
+        androidx.recyclerview.widget.LinearLayoutManager(this.context)
+            .apply { orientation = androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL }
     }
 
 
