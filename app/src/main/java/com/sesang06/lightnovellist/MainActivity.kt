@@ -58,10 +58,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) {
                 when (position) {
-                    0 -> bottom_navigation.selectedItemId = R.id.action_new
-                    1 -> bottom_navigation.selectedItemId = R.id.action_hot
-                    2 -> bottom_navigation.selectedItemId = R.id.action_comic_new
-                    3 -> bottom_navigation.selectedItemId = R.id.action_comic_hot
+                    0 -> bottom_navigation.selectedItemId = R.id.action_home
+                    1 -> bottom_navigation.selectedItemId = R.id.action_new
+                    2 -> bottom_navigation.selectedItemId = R.id.action_hot
+                    3 -> bottom_navigation.selectedItemId = R.id.action_comic_new
+                    4 -> bottom_navigation.selectedItemId = R.id.action_comic_hot
                 }
                 app_bar.setExpanded(true,true)
 

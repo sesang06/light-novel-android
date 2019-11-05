@@ -12,6 +12,8 @@ data class LightNovelSeries(
     val aladinId: Int = 0,
     @SerializedName("thumbnail")
     val thumbnail: String = "",
+    @SerializedName("description")
+    val description: String = "",
     @SerializedName("light_novels")
     private val lightNovels: List<LightNovel> = listOf(),
     @SerializedName("comics")

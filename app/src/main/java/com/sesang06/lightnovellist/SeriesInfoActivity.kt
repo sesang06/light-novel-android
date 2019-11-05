@@ -107,6 +107,15 @@ class SeriesInfoActivity: AppCompatActivity(), SeriesInfoNovelAdapter.ItemClickL
                     series_title_view.text = title
                 }, {})
         )
+
+        compositeDisposable.add(
+            viewModel.series
+                .map { it.description }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ description ->
+                    series_description_view.text = description
+                }, {})
+        )
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -114,11 +123,6 @@ class SeriesInfoActivity: AppCompatActivity(), SeriesInfoNovelAdapter.ItemClickL
             android.R.id.home -> this.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.info_menu, menu)
-        return true
     }
 
     override fun onStop() {

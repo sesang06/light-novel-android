@@ -5,7 +5,9 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import com.sesang06.lightnovellist.adapter.CategoryFilterAdapter
 import com.sesang06.lightnovellist.service.provideLightNovelListApi
 import com.sesang06.lightnovellist.viewmodel.CategoryFilterViewModel
@@ -28,7 +30,7 @@ class CategoryFilterActivity : AppCompatActivity(), CategoryFilterAdapter.ItemCl
     lateinit var viewModel: CategoryFilterViewModel
 
     private val categoryLayoutManager by lazy {
-        LinearLayoutManager(this)
+        GridLayoutManager(this, 4)
     }
 
 
@@ -51,7 +53,7 @@ class CategoryFilterActivity : AppCompatActivity(), CategoryFilterAdapter.ItemCl
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_filter)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar.title = ""
+        toolbar.title = "카테고리 변경"
         toolbar.subtitle = ""
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -105,6 +107,12 @@ class CategoryFilterActivity : AppCompatActivity(), CategoryFilterAdapter.ItemCl
 
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> this.onBackPressed()
+          }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
