@@ -11,10 +11,15 @@ https://play.google.com/store/apps/details?id=com.sesang06.lightnovellist
 
 서버 소스 : https://github.com/sesang06/light-novel-backend
 
-알라딘에서 라노벨 신간 목록 API (블로거만 신청해서 쓸 수 있는 private)
+nodejs, Koa.
 
-을 3시간마다 한번씩 요청해서 서버에 가져옵니다.
+크롤러 소스 : https://github.com/sesang06/light-novel-sql-script
 
+python. 알라딘에서 라노벨 신간 목록 API (블로거만 신청해서 쓸 수 있는 private)을 3시간마다 한번씩 요청해서 서버에 가져옵니다.
+
+엘라스틱 서치 소스 :https://github.com/sesang06/light-novel-search
+
+한글 검색을 원할하게  위해서 연동함
 
 
 
@@ -23,9 +28,9 @@ https://play.google.com/store/apps/details?id=com.sesang06.lightnovellist
 - 신간 보기
 - 인기 보기
   - <img src="/screenshot/1.png" width="200">
-- 카톡으로 공유 (공유하고 인싸가 되어보자)
+- 카톡으로 공유
   - <img src="/screenshot/4.png" width="200">
-- 상세 페이지 캡처 (공유하고 인싸가 되어보자)
+- 상세 페이지 캡처
 - 검색
   - <img src="/screenshot/3.png" width="200">
 - 신간 알람
